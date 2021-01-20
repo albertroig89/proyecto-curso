@@ -26,14 +26,7 @@ Route::get('/usuarios/{id}', 'UserController@show')
 
 Route::get('/usuarios/nuevo', 'UserController@create');
 
-Route::get('/saludo/{name}/{nickname?}', function($name, $nickname = null) { //AL POSAR EL ? DESPRES DEL CAMP EL FEM OPCIONAL
-    
-    $name = ucfirst($name);
-    
-    if($nickname){
-        return "Bienvenido {$name}, tu apodo es {$nickname}";
-    } else {
-        return "Bienvenido {$name}";
-    }
-    
-});
+Route::get('/usuarios/{id}/edit', 'UserController@edit')
+        ->where('id', '\d+');
+
+Route::get('/saludo/{name}/{nickname?}', 'WelcomeUserController@index');  //AL POSAR EL ? DESPRES DEL CAMP EL FEM OPCIONAL
