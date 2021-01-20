@@ -29,4 +29,6 @@ Route::get('/usuarios/nuevo', 'UserController@create');
 Route::get('/usuarios/{id}/edit', 'UserController@edit')
         ->where('id', '\d+');
 
-Route::get('/saludo/{name}/{nickname?}', 'WelcomeUserController@index');  //AL POSAR EL ? DESPRES DEL CAMP EL FEM OPCIONAL
+Route::get('/saludo/{name}', 'WelcomeUserController@index');  //AL POSAR EL ? DESPRES DEL CAMP EL FEM OPCIONAL
+
+Route::get('/saludo/{name}/{nickname}', 'WelcomeUserController@index2');
