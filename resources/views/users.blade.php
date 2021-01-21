@@ -9,16 +9,21 @@
         
     </head>
     <body>
-        <h1><?php echo e($title) ?></h1> <!-- -->
+        <h1>{{ $title }}</h1> <!-- >?= es una abreviacio de >?php echo -->
         
+        <hr>
         <ul>
-            
-            <?php foreach ($users as $user): ?>
-                <li><?php echo e($user) ?></li> <!--e($user) el que fa es ometre la lectura si algu ens coloca codic de html o javascript aon tindria que anar el nom d'usuari-->
-            <?php endforeach; ?>
-            
+
+        @forelse ($users as $user)
+            <li>{{ $user }}</li> <!--e($user) el que fa es ometre la lectura si algu ens coloca codic de html o javascript aon tindria que anar el nom d'usuari-->
+        @empty
+            <li>No hay usuarios registrados.</li>
+
+        @endforelse
+
         </ul>
         
+        {{ time() }}
     </body>
     
 </html>
