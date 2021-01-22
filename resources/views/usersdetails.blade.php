@@ -9,7 +9,7 @@
         
     </head>
     <body>
-        <h1>{{ $title }}</h1> <!-- >?= es una abreviacio de >?php echo -->
+        <h1>{{ $title }}</h1> <
         
         <hr>
         <ul>

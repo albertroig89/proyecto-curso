@@ -9,12 +9,12 @@
         
     </head>
     <body>
-         <h1>{{ $title }}</h1> <!-- >?= es una abreviacio de >?php echo -->
+         <h1>{{ $title }}</h1> 
         
         <hr>
         <ul>
 
-            <li>Editar usuario {{ $id }}</li> <!--e($user) el que fa es ometre la lectura si algu ens coloca codic de html o javascript aon tindria que anar el nom d'usuari-->
+            <li>Editar usuario {{ $id }}</li>
 
         </ul>
 
