@@ -46,17 +46,25 @@ class UserController extends Controller
     }
     
     public function show($id) {
-        return 'Mostrando detalle del usuario: '.$id;
+        
+        $title = 'Detalles de Usuarios';
+        
+        return view('usersdetails', compact('title', 'id'));
+        //return 'Mostrando detalle del usuario: '.$id;
         /*return "Mostrando detalle del usuario: {$id}"*/ /*fa el mateix que la linea anterior en sintaxis diferent*/
     }
     
     public function create()
     {
-        return 'Crear nuevo usuario';
+        $title = 'Creacion de Usuarios';
+        
+        return view('userscreate', compact('title'));
     }
     
     public function edit($id)
     {
-        return 'Editar usuario '.$id;
+        $title = 'Edicion de Usuarios';
+        
+        return view('usersedit', compact('title', 'id'));
     }
 }
