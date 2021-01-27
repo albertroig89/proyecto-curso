@@ -15,6 +15,8 @@ Route::get('/', function () {
     return 'Home';
 });
 
+Route::get('/menu', 'UserController@menu');
+
 Route::get('/usuarios', 'UserController@index');
 
 //usuarios/nuevo != usuarios/[0-9]+  EL WHERE ARA ENS DIFERENCIA ENTRE SI LI DONEM UN NUMERO O NO PERQUE SINO MAI ENS ENTRARA A LA NOVA FUNCIO

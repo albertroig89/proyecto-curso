@@ -71,4 +71,11 @@ class UserController extends Controller
         
         return view('users.edit', compact('title', 'id'));
     }
+    public function menu()
+    {
+        $title = 'Menu';
+        
+        return view('menu', compact('title'));
+    }
+    
 }

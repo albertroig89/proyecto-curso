@@ -1,11 +1,11 @@
 @extends('layout')
 
-@section('title', "Creacion de usuarios")
+@section('title', "Menu")
 
 @section('content')
 
         <h1>{{ $title }}</h1>
 
-        Crear nuevo usuario
+        Menu
         
 @endsection
