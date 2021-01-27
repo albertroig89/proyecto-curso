@@ -41,7 +41,7 @@ class UserController extends Controller
         //var_dump(compact('title', 'users')); die(); ES EL MATEIX QUE LA LINEA ANTERIOR EN DIFERENT SINTAXIS
         
         
-        return view('users', compact('title', 'users'));
+        return view('users.index', compact('title', 'users'));
         
     }
     
@@ -49,7 +49,7 @@ class UserController extends Controller
         
         $title = 'Detalles de Usuarios';
         
-        return view('usersshow', compact('title', 'id'));
+        return view('users.show', compact('title', 'id'));
         
         
         
@@ -62,13 +62,13 @@ class UserController extends Controller
     {
         $title = 'Creacion de Usuarios';
         
-        return view('userscreate', compact('title'));
+        return view('users.create', compact('title'));
     }
     
     public function edit($id)
     {
         $title = 'Edicion de Usuarios';
         
-        return view('usersedit', compact('title', 'id'));
+        return view('users.edit', compact('title', 'id'));
     }
 }

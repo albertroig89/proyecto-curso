@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.79.0">
-    <title>Sticky Footer Navbar Template · Bootstrap v5.0</title>
+    <title>@yield('title') - SdArCkNeS</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sticky-footer-navbar/">
 
@@ -77,3 +77,30 @@
 
 <!-- Begin page content -->
 <main class="flex-shrink-0">
+    <br>
+    <br>
+    <div class="row mt-3">
+        <div class="col-8">
+           @yield('content')
+        </div>
+        <div class="col-4">
+            @section('sidebar')
+                <h2>Barra Lateral</h2>
+            @show
+        </div>
+
+    </div>
+</main>
+
+<footer class="footer mt-auto py-3 bg-light">
+  <div class="container">
+    <span class="text-muted">Place sticky footer content here.</span>
+  </div>
+</footer>
+
+
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+      
+  </body>
+</html>
