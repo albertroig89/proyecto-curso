@@ -10,14 +10,12 @@ class WelcomeUserController extends Controller
     {
         /*$name = ucfirst($name);
         return "Bienvenido {$name}";*/
-       $title = 'Bienvenido';
-        return view('saludo1', compact('name', 'title'));
+        return view('saludo1', compact('name'));
     }
     public function index2($name, $nickname)
     {
         /*$name = ucfirst($name);
         return "Bienvenido {$name}, tu apodo es {$nickname}";*/
-        $title = 'Bienvenido';
-        return view('saludo2', compact('name', 'nickname', 'title'));
+        return view('saludo2', compact('name', 'nickname'));
     }
 }
