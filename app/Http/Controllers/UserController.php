@@ -51,9 +51,6 @@ class UserController extends Controller
         
         return view('users.show', compact('title', 'id'));
         
-        
-        
-        //return view('usersdetails', compact('title', 'id'));
         //return 'Mostrando detalle del usuario: '.$id;
         /*return "Mostrando detalle del usuario: {$id}"*/ /*fa el mateix que la linea anterior en sintaxis diferent*/
     }
