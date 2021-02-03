@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->increments('id'); //INTEGER UNSIGNED - AUTOINCRMENT
             $table->string('name'); //VARCHAR
             $table->string('email')->unique(); //VARCHAR - UNIQUE
-            $table->string('password'); //VARCHAR
+            $table->string('password'); //VARCHAR    
             $table->rememberToken(); //
             $table->timestamps();
         });
