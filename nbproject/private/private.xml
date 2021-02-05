@@ -6,6 +6,7 @@
             <file>file:/home/albert/Proyectos/proyecto-curso/routes/web.php</file>
             <file>file:/home/albert/Proyectos/proyecto-curso/database/migrations/2014_10_12_000000_create_users_table.php</file>
             <file>file:/home/albert/Proyectos/proyecto-curso/database/migrations/2021_02_01_183043_create_professions_table.php</file>
+            <file>file:/home/albert/Proyectos/proyecto-curso/database/seeds/UserSeeder.php</file>
             <file>file:/home/albert/Proyectos/proyecto-curso/database/migrations/2021_02_02_182919_add_profession_id_to_users.php</file>
         </group>
     </open-files>
