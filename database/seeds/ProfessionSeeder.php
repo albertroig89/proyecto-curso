@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Profession;
+use App\Profession;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -22,7 +22,7 @@ class ProfessionSeeder extends Seeder
 //           'title' => 'Desarrollador back-end',
 //        ]);                                       //Es el mateix escrit en lo constructor de consultes
         
-        \App\Models\Profession::create([
+        App\Profession::create([
             'title' => 'Desarrollador back-end', 
         ]);                                         //Es el mateix escrit en models de laravel
         
