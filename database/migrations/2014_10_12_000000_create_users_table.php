@@ -17,7 +17,8 @@ class CreateUsersTable extends Migration
             $table->increments('id'); //INTEGER UNSIGNED - AUTOINCRMENT
             $table->string('name'); //VARCHAR
             $table->string('email')->unique(); //VARCHAR - UNIQUE
-            $table->string('password'); //VARCHAR    
+            $table->string('password'); //VARCHAR
+            $table->boolean('is_admin')->default(false);
             $table->rememberToken(); //
             $table->timestamps();
         });
