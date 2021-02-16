@@ -43,5 +43,7 @@ class ProfessionSeeder extends Seeder
         
         //DB::delete('DELETE FROM professions WHERE (title) = (:title)', ['title' => 'Tecnico informatico']);
         //EXERCICI 13 FET EN SQL
+        
+        factory(Profession::class, 16)->create();
     }
 }
