@@ -24,7 +24,8 @@ class UserSeeder extends Seeder
             'name' => 'Albert Roig',
             'email' => 'albertroiglg@gmail.com',
             'password' => bcrypt('laravel'),
-            'profession_id' => $professionId
+            'profession_id' => $professionId,
+            'is_admin' => true
         ]);
         
         /*DB::insert('INSERT INTO users (name, email, password, profession_id) VALUES ("Laia Barco", "laiayniska@gmail.com", "12345678", "2")');*/
@@ -36,6 +37,20 @@ class UserSeeder extends Seeder
             'password' => bcrypt('laravel2'),
             'profession_id' => '2'
         ]); //EXERCICI TEMA 13 FET EN CONSTRUCTOR DE CONSULTES DE LARAVEL
+        
+         User::create([
+            'name' => 'Lidia Albiol',
+            'email' => 'mtlidia55@gmail.com',
+            'password' => bcrypt('laravel3'),
+            'profession_id' => null
+        ]);
+         
+          User::create([
+            'name' => 'Andreu Roig',
+            'email' => 'andreubou@gmail.com',
+            'password' => bcrypt('laravel4'),
+            'profession_id' => $professionId
+        ]);
         
     }
 }
