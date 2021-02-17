@@ -55,7 +55,9 @@ class UserController extends Controller
         
         $title = 'Detalles de Usuarios';
         
-        return view('users.show', compact('title', 'id'));
+        $user = User::find($id);
+        
+        return view('users.show', compact('title', 'user'));
         
         //return 'Mostrando detalle del usuario: '.$id;
         /*return "Mostrando detalle del usuario: {$id}"*/ /*fa el mateix que la linea anterior en sintaxis diferent*/

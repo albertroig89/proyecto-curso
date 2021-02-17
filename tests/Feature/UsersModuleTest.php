@@ -20,12 +20,12 @@ class UsersModuleTest extends TestCase
     {
         
         factory(User::class)->create([
-            'name' => 'Albert',
+            'name' => 'Albert Roig',
             'website' => 'coldwar.cat'
         ]);
         
         factory(User::class)->create([  
-            'name' => 'Laia'
+            'name' => 'Laia Barco'
         ]);
         
         
@@ -51,11 +51,15 @@ class UsersModuleTest extends TestCase
      * @test
      */
     
-    function it_loads_the_users_details_page()
+    function it_displays_the_users_details()
     {
-        $this->get('/usuarios/5')
+        $user = factory(User::class)->create([
+            'name' => 'Albert Roig'
+        ]);
+        
+        $this->get('/usuarios/'.$user->id)// usuarios/5
                 ->assertStatus(200)
-                ->assertSee('Mostrando detalle del usuario: 5');
+                ->assertSee('Albert Roig');
     }
     
     /**
