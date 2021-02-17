@@ -8,7 +8,7 @@
     <ul>
 
         @forelse ($users as $user)
-            <li>{{ $user }}</li> <!--e($user) el que fa es ometre la lectura si algu ens coloca codic de html o javascript aon tindria que anar el nom d'usuari-->
+            <li>{{ $user->name }}</li> <!--e($user) el que fa es ometre la lectura si algu ens coloca codic de html o javascript aon tindria que anar el nom d'usuari-->
         @empty
             <li>No hay usuarios registrados.</li>
 

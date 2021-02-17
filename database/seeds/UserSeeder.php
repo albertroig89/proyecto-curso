@@ -28,20 +28,6 @@ class UserSeeder extends Seeder
             'is_admin' => true
         ]);
         
-        factory(User::class)->create([  //Crea usuari en nom aleatori i les dades que yo li paso
-            'email' => 'joanr@gmail.com',
-            'password' => bcrypt('pass1234'),
-            'profession_id' => $professionId,
-        ]);
-        
-        factory(User::class)->create([  //Crea usuari en dades aleatories pero en la professio en id 3
-            'profession_id' => 3
-        ]);
-        
-        factory(User::class)->create(); //Crea un usuari en dades aleatories
-        
-        factory(User::class, 40)->create(); //Crea 40 usuaris en dades aleatories
-        
         /*DB::insert('INSERT INTO users (name, email, password, profession_id) VALUES ("Laia Barco", "laiayniska@gmail.com", "12345678", "2")');*/
         //EXERCICI TEMA 13 FET EN SQL
         
@@ -65,6 +51,20 @@ class UserSeeder extends Seeder
             'password' => bcrypt('laravel4'),
             'profession_id' => $professionId
         ]);
+        
+        factory(User::class)->create([  //Crea usuari en nom aleatori i les dades que yo li paso
+            'email' => 'joanr@gmail.com',
+            'password' => bcrypt('pass1234'),
+            'profession_id' => $professionId,
+        ]);
+        
+        factory(User::class)->create([  //Crea usuari en dades aleatories pero en la professio en id 3
+            'profession_id' => 3
+        ]);
+        
+        factory(User::class)->create(); //Crea un usuari en dades aleatories
+        
+        factory(User::class, 40)->create(); //Crea 40 usuaris en dades aleatories
         
     }
 }

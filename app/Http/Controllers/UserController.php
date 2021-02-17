@@ -2,13 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
     public function index() {
+        
+        //$users = DB::table('users')->get(); //constructor de consultes
+        $users = User::all();//fa el mateix que la linea anterior pero en eloquent
+        
     
-        if (request()->has('empty')) {
+/*        if (request()->has('empty')) {
             $users = [];
         } else {
             $users = [
@@ -19,7 +25,7 @@ class UserController extends Controller
             'Bonica',
             'Bimo',
             ];
-        }
+        }*/
         
         
         
