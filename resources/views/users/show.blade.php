@@ -8,5 +8,5 @@
 
         <p>Nombre del usuario: {{ $user->name }}</p>
         <p>Nombre del usuario: {{ $user->email }}</p>
-        
+              
 @endsection
