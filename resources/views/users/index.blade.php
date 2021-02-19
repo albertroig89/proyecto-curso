@@ -13,6 +13,7 @@
                       <th scope="col">Id</th>
                       <th scope="col">Nombre</th>
                       <th scope="col">Correo electronico</th>
+                      <th scope="col">Visualizar detalles Usuario</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -21,6 +22,8 @@
                         <th scope="row">{{ $user->id }}</th>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
+                        <td><a href="{{ url("/usuarios/{$user->id}") }}">Ver detalles</a></td>
+                        <!--<td><a href="{{ url('/usuarios/'.$user->id) }}">Ver detalles</a></td> Fa el mateix que la linea anterior-->
                       </tr>
             @endforeach
             </tbody>

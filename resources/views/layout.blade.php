@@ -80,13 +80,18 @@
     <br>
     <br>
     <div class="row mt-3">
-        <div class="col-8">
+        <div class="col-10">
            @yield('content')
         </div>
-        <div class="col-4">
+        <div class="col-2">
             @section('sidebar')
-                <h2>Barra Lateral</h2>
+                <h2>Menu</h2>
             @show
+            <a href="../../usuarios">Mostrar usuarios</a><br>
+            <a href="../../usuarios/nuevo">Crear usuarios</a><br>
+            <a href="../../usuarios/1/edit">Editar usuarios</a><br>
+            <a href="../../saludo/albert">Saludo</a><br>
+            <a href="../../saludo/albert/sdarcknes">Saludo nickname</a><br>
         </div>
 
     </div>

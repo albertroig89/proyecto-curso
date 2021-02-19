@@ -7,6 +7,12 @@
         <h1>Usuario #{{ $user->id }}</h1>
 
         <p>Nombre del usuario: {{ $user->name }}</p>
-        <p>Nombre del usuario: {{ $user->email }}</p>
+        <p>Correo electronico: {{ $user->email }}</p>
+        @empty($user->profession_id)
+            <p>No tiene profession</p>
+        @else
+            <p>Profession: {{ $user->profession->title }}</p>
+        @endempty
+        <p><a href="{{ url('/usuarios') }}">Regresar</a></p>
               
 @endsection
