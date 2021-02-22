@@ -13,6 +13,6 @@
         @else
             <p>Profession: {{ $user->profession->title }}</p>
         @endempty
-        <p><a href="{{ url('/usuarios') }}">Regresar</a></p>
+        <p><a href="{{ url('/usuarios') }}">Regresar al listado de usuarios</a></p>
               
 @endsection

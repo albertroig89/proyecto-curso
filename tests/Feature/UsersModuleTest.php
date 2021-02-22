@@ -92,18 +92,5 @@ class UsersModuleTest extends TestCase
     {
         $this->get('/usuarios/texto/edit')
                 ->assertStatus(404);
-    }
-    
-    /**
-     * @test
-     */
-    
-    function it_shows_the_menu_webpage()
-    {
-        $this->get('/menu')
-                ->assertStatus(200)
-                ->assertSee('Menu')
-                ->assertSee('Mostrar usuarios')
-                ->assertSee('Crear usuarios');
-    }
+    }    
 }
