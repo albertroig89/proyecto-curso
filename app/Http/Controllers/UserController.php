@@ -72,14 +72,14 @@ class UserController extends Controller
     
     public function create()
     {
-        $title = 'Creacion de Usuarios';
+        $title = 'Creacion de usuarios';
         
         return view('users.create', compact('title'));
     }
     
     public function edit($id)
     {
-        $title = 'Edicion de Usuarios';
+        $title = 'Edicion de usuarios';
         
         return view('users.edit', compact('title', 'id'));
     }
@@ -92,6 +92,14 @@ class UserController extends Controller
 
     public function store()
     {
+        $data = request()->all();
+
+        User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password'])
+        ]);
+
         return 'Procesando información...';
     }
     
