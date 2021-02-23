@@ -24,8 +24,8 @@ Route::get('/usuarios', 'UserController@index')
 //usuarios/nuevo != usuarios/[0-9]+  EL WHERE ARA ENS DIFERENCIA ENTRE SI LI DONEM UN NUMERO O NO PERQUE SINO MAI ENS ENTRARA A LA NOVA FUNCIO
 //TAMBE TINDRE EN COMPTE QUE SI EN LLOC DEL WHERE CAMBIEM L'ORDRE DE LES FUNCIONS TAMBE ENS FARIA EL MATEIX
 
-Route::get('/usuarios/{id}', 'UserController@show')
-    ->where('id', '[0-9]+')
+Route::get('/usuarios/{user}', 'UserController@show')
+    ->where('user', '[0-9]+')
     ->name('users.show');
  //->here('id', '\d+'); ES EL MATEIX QUE LA LINEA ANTERIOR EL + SIGNIFICA QUE HI POT HABER MES D'UN NUMERO
 
@@ -33,7 +33,8 @@ Route::get('/usuarios/nuevo', 'UserController@create')
     ->name('users.create');
 
 Route::get('/usuarios/{id}/edit', 'UserController@edit')
-        ->where('id', '\d+');
+        ->where('id', '\d+')
+        ->name('users.edit');
 
 Route::get('/saludo/{name}', 'WelcomeUserController@index');  //AL POSAR EL ? DESPRES DEL CAMP EL FEM OPCIONAL
 

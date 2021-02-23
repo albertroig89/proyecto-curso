@@ -51,12 +51,19 @@ class UserController extends Controller
         
     }
     
-    public function show($id) {
+    public function show(User $user) {
         
         $title = 'Detalles de Usuarios';
-        
-        $user = User::find($id);
-        
+
+//        $user = User::find($id); el bloc fa el mateix que: $user = User::findOrFail($id);
+//
+//        if ($user == null)
+//        {
+//            return response()->view('errors.404', [], 404);
+//        }
+
+//        $user = User::findOrFail($id); No fa falta perque hem posat directament $user enlloc del $id i ja ho controla automaticament eloquent
+
         return view('users.show', compact('title', 'user'));
         
         //return 'Mostrando detalle del usuario: '.$id;

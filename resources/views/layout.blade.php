@@ -87,8 +87,8 @@
             @section('sidebar')
                 <h2>Menu</h2>
             @show
-            <a href="../../usuarios">Mostrar usuarios</a><br>
-            <a href="../../usuarios/nuevo">Crear usuarios</a><br>
+            <a href="{{ route('users.index') }}">Mostrar usuarios</a><br>
+            <a href="{{ route('users.create') }}">Crear usuarios</a><br>
             <a href="../../usuarios/1/edit">Editar usuarios</a><br>
             <a href="../../saludo/albert">Saludo</a><br>
             <a href="../../saludo/albert/sdarcknes">Saludo nickname</a><br>
