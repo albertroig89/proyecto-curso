@@ -100,7 +100,8 @@ class UserController extends Controller
             'password' => bcrypt($data['password'])
         ]);
 
-        return 'Procesando información...';
+        return redirect('usuarios');
+        //return redirect()->route('users.index'); EL MATEIX QUE LA LINEA ANTERIOR
     }
     
 }

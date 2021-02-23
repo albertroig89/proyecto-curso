@@ -105,16 +105,17 @@ class UsersModuleTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $this->post('/usuarios/', [
+        $this->post('/usuarios', [
             'name' => 'Albert',
             'email' => 'albertroiglg@gmail.com',
             'password' => '123456'
-        ]);
+        ])->assertRedirect('usuarios');
+        //])->assertRedirect(route('users.index')); EL MATEIX QUE LA LINEA ANTERIOR
 
-        $this->assertDatabaseHas('users', [
+        $this->assertCredentials([
             'name' => 'Albert',
             'email' => 'albertroiglg@gmail.com',
-            //'password' => '123456'
+            'password' => '123456'
         ]);
     }
 }
