@@ -89,5 +89,10 @@ class UserController extends Controller
         
         return view('menu', compact('title'));
     }
+
+    public function store()
+    {
+        return 'Procesando información...';
+    }
     
 }
