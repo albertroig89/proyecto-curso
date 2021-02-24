@@ -24,8 +24,8 @@
 
                 <div class="form-group">
                         <label for="name">Nombre:</label>
-                        <input type="text" name="name" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Bertito tito">
-                        <small id="emailHelp" class="form-text text-muted">Tu nombre.</small>
+                        <input type="text" name="name" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Bertito tito">
+                        <small id="nameHelp" class="form-text text-muted">Tu nombre.</small>
                 </div>
                 <br>
                 <div class="form-group">
