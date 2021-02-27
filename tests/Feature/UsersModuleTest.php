@@ -124,7 +124,6 @@ class UsersModuleTest extends TestCase
      */
     function the_name_is_required()
     {
-
         $this->from('usuarios/nuevo')
             ->post('/usuarios', [
                 'name' => '',
@@ -135,10 +134,78 @@ class UsersModuleTest extends TestCase
         ->assertSessionHasErrors(['name' => 'El campo nombre es obligatorio']);
 
         $this->assertEquals(0, User::count());
-
-//        $this->assertDatabaseMissing('users', [
-//            'email' => 'albertroiglg@gmail.com',
-//        ]);
-
     }
+
+    /**
+     * @test
+     */
+    function the_email_is_required()
+    {
+        $this->from('usuarios/nuevo')
+            ->post('/usuarios', [
+                'name' => 'Albert Roig',
+                'email' => '',
+                'password' => '123456'
+            ])
+            ->assertRedirect('usuarios/nuevo')
+            ->assertSessionHasErrors(['email' => 'Introduce un correo electronico']);
+
+        $this->assertEquals(0, User::count());
+    }
+
+    /**
+     * @test
+     */
+    function the_email_must_be_valid()
+    {
+        $this->from('usuarios/nuevo')
+            ->post('/usuarios', [
+                'name' => 'Albert Roig',
+                'email' => 'correo-no-valido',
+                'password' => '123456'
+            ])
+            ->assertRedirect('usuarios/nuevo')
+            ->assertSessionHasErrors(['email' => 'Introduce un correo electronico correcto']);
+
+        $this->assertEquals(0, User::count());
+    }
+
+    /**
+     * @test
+     */
+    function the_email_must_be_unique()
+    {
+        factory(USer::class)->create([
+           'email' => 'albertroiglg@gmail.com'
+        ]);
+
+        $this->from('usuarios/nuevo')
+            ->post('/usuarios', [
+                'name' => 'Albert Roig',
+                'email' => 'albertroiglg@gmail.com',
+                'password' => '123456'
+            ])
+            ->assertRedirect('usuarios/nuevo')
+            ->assertSessionHasErrors(['email' => 'El correo introducido ya existe']);
+
+        $this->assertEquals(1, User::count());
+    }
+
+    /**
+     * @test
+     */
+    function the_password_is_required()
+    {
+        $this->from('usuarios/nuevo')
+            ->post('/usuarios', [
+                'name' => 'Albert Roig',
+                'email' => 'albertroiglg@gmail.com',
+                'password' => ''
+            ])
+            ->assertRedirect('usuarios/nuevo')
+            ->assertSessionHasErrors(['password' => 'Especifica una contraseña']);
+
+        $this->assertEquals(0, User::count());
+    }
+
 }
