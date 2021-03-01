@@ -40,14 +40,18 @@
                         </div>
 
                         <div class="col-md-4 mb-3">
+                            @if ($errors->has('email'))
                                 <label for="email">Correo electronico:</label>
                                 <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="bertito@example.es" value="{{ old('email') }}">
                                 <small id="emailHelp" class="form-text text-muted">Nunca compartas tu email con nadie.</small>
-                                @if ($errors->has('email'))
-                                        <div class="invalid-feedback">
-                                                {{ $errors->first('email') }}
-                                        </div>
-                                @endif
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('email') }}
+                                </div>
+                            @else
+                                <label for="email">Correo electronico:</label>
+                                <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="bertito@example.es" value="{{ old('email') }}">
+                                <small id="emailHelp" class="form-text text-muted">Nunca compartas tu email con nadie.</small>
+                            @endif
                         </div>
 
 
