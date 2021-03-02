@@ -34,7 +34,7 @@ Route::get('/usuarios/nuevo', 'UserController@create')
 
 Route::post('/usuarios', 'UserController@store'); // PODEM POSAR 2 RUTES AL MATEIX LLOC PER DIFIRENTS METODOS "GET" I "POST"s
 
-Route::get('/usuarios/{id}/edit', 'UserController@edit')
+Route::get('/usuarios/{user}/editar', 'UserController@edit')
         ->where('id', '\d+')
         ->name('users.edit');
 

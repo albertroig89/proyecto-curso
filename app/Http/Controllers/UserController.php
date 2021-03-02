@@ -77,11 +77,11 @@ class UserController extends Controller
         return view('users.create', compact('title'));
     }
     
-    public function edit($id)
+    public function edit(User $user)
     {
         $title = 'Edicion de usuarios';
         
-        return view('users.edit', compact('title', 'id'));
+        return view('users.edit', ['user' => $user], compact('title'));
     }
     public function menu()
     {
@@ -95,7 +95,7 @@ class UserController extends Controller
         $data = request()->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
-//            'email' => ['required', 'email', 'unique'], FA EL MATEIX QUE LA LINEA ANTERIOR
+//            'email' => ['required', 'email', 'unique':users,email], FA EL MATEIX QUE LA LINEA ANTERIOR
             'password' => 'required|min:6'
         ], [
             'name.required' => 'El campo nombre es obligatorio',

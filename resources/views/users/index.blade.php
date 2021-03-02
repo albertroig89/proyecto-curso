@@ -13,7 +13,8 @@
                       <th scope="col">Id</th>
                       <th scope="col">Nombre</th>
                       <th scope="col">Correo electronico</th>
-                      <th scope="col">Visualizar detalles Usuario</th>
+                      <th scope="col">Visualizar detalles usuario</th>
+                      <th scope="col">Editar detalles del usuario</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -24,6 +25,7 @@
                         <td>{{ $user->email }}</td>
                         <td><a href="{{ route('users.show', ['id' => $user->id]) }}">Ver detalles</a></td>
                         <!--<td><a href="{{ url('/usuarios/'.$user->id) }}">Ver detalles</a></td> Fa el mateix que la linea anterior-->
+                        <td><a href="{{ route('users.edit', ['id' => $user->id]) }}">Editar</a></td>
                       </tr>
             @endforeach
             </tbody>

@@ -78,25 +78,6 @@ class UsersModuleTest extends TestCase
                 ->assertStatus(200)
                 ->assertSee('Creacion de usuarios');
     }
-    
-    /**
-     * @test
-     */
-    function it_loads_the_edit_users_details_page()
-    {
-        $this->get('/usuarios/5/edit')
-                ->assertStatus(200)
-                ->assertSee('Editar usuario 5');
-    }
-    
-    /**
-     * @test
-     */
-    function it_loads_no_edit_users_details_page()
-    {
-        $this->get('/usuarios/texto/edit')
-                ->assertStatus(404);
-    }
 
     /**
      * @test
@@ -207,5 +188,40 @@ class UsersModuleTest extends TestCase
 
         $this->assertEquals(0, User::count());
     }
+
+    /**
+     * @test
+     */
+    function it_loads_the_edit_user_page()
+    {
+        $user = factory(User::class)->create();
+
+        $this->get("/usuarios/{$user->id}/editar")
+            ->assertStatus(200)
+            ->assertSee('Editar usuario')
+            ->assertViewIs('users.edit')
+            ->assertViewHas('user', function ($viewUser) use ($user) {
+                return $viewUser->id == $user->id;
+            });
+    }
+
+//    /**
+//     * @test
+//     */
+//    function it_loads_the_edit_users_details_page()
+//    {
+//        $this->get('/usuarios/5/editar')
+//            ->assertStatus(200)
+//            ->assertSee('Editar usuario 5');
+//    }
+//
+//    /**
+//     * @test
+//     */
+//    function it_loads_no_edit_users_details_page()
+//    {
+//        $this->get('/usuarios/texto/editar')
+//            ->assertStatus(404);
+//    }
 
 }
