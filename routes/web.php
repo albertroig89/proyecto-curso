@@ -38,6 +38,8 @@ Route::get('/usuarios/{user}/editar', 'UserController@edit')
         ->where('id', '\d+')
         ->name('users.edit');
 
+Route::put('/usuarios/{user}', 'UserController@update');
+
 Route::get('/saludo/{name}', 'WelcomeUserController@index');  //AL POSAR EL ? DESPRES DEL CAMP EL FEM OPCIONAL
 
 Route::get('/saludo/{name}/{nickname}', 'WelcomeUserController@index2');

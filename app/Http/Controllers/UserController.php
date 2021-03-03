@@ -121,5 +121,17 @@ class UserController extends Controller
         return redirect('usuarios');
         //return redirect()->route('users.index'); EL MATEIX QUE LA LINEA ANTERIOR
     }
+
+    public function update(User $user)
+    {
+        $data = request()->all();
+
+        $data['password'] = bcrypt($data['password']);
+
+        $user->update($data);
+
+//        return redirect("usuarios/{$user->id}"); FA EL MATEIX QUE LA LINEA ANTERIOR
+        return redirect()->route('users.show', ['user' => $user]);
+    }
     
 }
