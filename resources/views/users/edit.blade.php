@@ -6,8 +6,8 @@
 
         <h1>{{ $title }}</h1>
 
-        <form method="POST" action="{{ url('usuarios') }}">
-
+        <form method="POST" action="{{ url("usuarios/{$user->id}") }}">
+                {{ method_field('PUT') }}
                 {!! csrf_field() !!}
 
                 <div class="form-row">

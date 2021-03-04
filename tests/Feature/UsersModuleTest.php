@@ -250,23 +250,6 @@ class UsersModuleTest extends TestCase
     /**
      * @test
      */
-    function the_email_is_required_when_updating_the_user()
-    {
-        $this->from('usuarios/nuevo')
-            ->post('/usuarios', [
-                'name' => 'Albert Roig',
-                'email' => '',
-                'password' => '123456'
-            ])
-            ->assertRedirect('usuarios/nuevo')
-            ->assertSessionHasErrors(['email' => 'Introduce un correo electronico']);
-
-        $this->assertEquals(0, User::count());
-    }
-
-    /**
-     * @test
-     */
     function the_email_must_be_valid_when_updating_the_user()
     {
         $user = factory(User::class)->create();
@@ -305,6 +288,25 @@ class UsersModuleTest extends TestCase
             ->assertSessionHasErrors(['email' => 'El correo introducido ya existe']);
 
         $this->assertEquals(1, User::count());
+    }
+
+    /**
+     * @test
+     */
+    function the_password_is_required_when_updating_the_user()
+    {
+        $user = factory(USer::class)->create();
+
+        $this->from("usuarios/{$user->id}/editar")
+            ->put("usuarios/{$user->id}", [
+                'name' => 'Albert Roig',
+                'email' => 'albertroiglg@gmail.com',
+                'password' => ''
+            ])
+            ->assertRedirect("usuarios/{$user->id}/editar")
+            ->assertSessionHasErrors(['password']);
+
+        $this->assertDatabaseMissing('users', ['email' => 'albertroiglg@gmail.com']);
     }
 //    /**
 //     * @test
