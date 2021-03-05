@@ -129,7 +129,13 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email,'.$user->id,
  //           'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)], //FA EL MATEIX QUE LA LINEA ANTERIOR PERO A MI ME FALLA FINAL TEMA 36
             'password' => ''
+        ], [
+            'name.required' => 'El campo nombre es obligatorio',
+            'email.required' => 'Introduce un correo electronico',
+            'email.email' => 'Introduce un correo electronico correcto',
+            'email.unique' => 'El correo introducido ya existe',
         ]);
+
         if ($data['password'] != null) {
             $data['password'] = bcrypt($data['password']);
         }else{

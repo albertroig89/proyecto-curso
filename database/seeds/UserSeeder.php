@@ -32,8 +32,8 @@ class UserSeeder extends Seeder
         //EXERCICI TEMA 13 FET EN SQL
         
         DB::table('users')->insert([
-            'name' => 'Laia Barco',
-            'email' => 'laiayniska@gmail.com',
+            'name' => 'Joan Roig',
+            'email' => 'joanroig@gmail.com',
             'password' => bcrypt('laravel2'),
             'profession_id' => '2'
         ]); //EXERCICI TEMA 13 FET EN CONSTRUCTOR DE CONSULTES DE LARAVEL
