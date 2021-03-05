@@ -127,6 +127,7 @@ class UserController extends Controller
         $data = request()->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email,'.$user->id,
+ //           'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)], //FA EL MATEIX QUE LA LINEA ANTERIOR PERO A MI ME FALLA FINAL TEMA 36
             'password' => ''
         ]);
         if ($data['password'] != null) {
