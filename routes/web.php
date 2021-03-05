@@ -44,4 +44,5 @@ Route::get('/saludo/{name}', 'WelcomeUserController@index');  //AL POSAR EL ? DE
 
 Route::get('/saludo/{name}/{nickname}', 'WelcomeUserController@index2');
 
-Route::delete('/usuarios/{user}', 'UserController@destroy');
+Route::delete('/usuarios/{user}', 'UserController@destroy')
+    ->name('users.destroy');
