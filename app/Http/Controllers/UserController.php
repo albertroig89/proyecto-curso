@@ -146,5 +146,12 @@ class UserController extends Controller
 //        return redirect("usuarios/{$user->id}"); FA EL MATEIX QUE LA LINEA ANTERIOR
         return redirect()->route('users.show', ['user' => $user]);
     }
+
+    function destroy(User $user)
+    {
+        $user->delete();
+
+        return redirect()->route('users.index');
+    }
     
 }
