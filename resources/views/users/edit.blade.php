@@ -10,7 +10,7 @@
                 {{ method_field('PUT') }}
                 {!! csrf_field() !!}
 
-                <div class="form-row">
+                <div class="form">
                         <div class="col-md-4 mb-3">
                                 @if ($errors->has('name'))
                                         <label for="name">Nombre:</label>
