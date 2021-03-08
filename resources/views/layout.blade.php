@@ -80,13 +80,12 @@
 
 <!-- Begin page content -->
 <main class="flex-shrink-0">
-    <br>
-    <br>
-    <div class="row mt-3">
-        <div class="col-10">
+
+    <div class="row ml-3 mt-5">
+        <div class="mt-3 col-10">
            @yield('content')
         </div>
-        <div class="col-2">
+        <div class="mt-3 col-2">
             @section('sidebar')
                 <h2>Menu</h2>
             @show

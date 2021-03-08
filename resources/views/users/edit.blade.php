@@ -4,15 +4,15 @@
 
 @section('content')
 
-    <div class="card">
+    <div class="card pl-0 pr-0 col-md-4">
         <div class="card-header"><h3>{{ $title }}</h3></div>
         <div class="card-body">
             <form method="POST" action="{{ url("usuarios/{$user->id}") }}">
                 {{ method_field('PUT') }}
                 {!! csrf_field() !!}
 
-                <div class="form">
-                    <div class="col-md-4 mb-3">
+                <div class="form-group">
+                    <div class="form-group">
                         @if ($errors->has('name'))
                             <label for="name">Nombre:</label>
                             <input type="text" name="name" class="form-control is-invalid" id="name" aria-describedby="nameHelp" placeholder="Bertito tito" value="{{ old('name', $user->name) }}">
@@ -32,7 +32,7 @@
                         @endif
                     </div>
 
-                    <div class="col-md-4 mb-3">
+                    <div class="form-group">
                         @if ($errors->has('email'))
                             <label for="email">Correo electronico:</label>
                             <input type="email" name="email" class="form-control is-invalid" id="email" aria-describedby="emailHelp" placeholder="bertito@example.es" value="{{ old('email', $user->email) }}">
@@ -51,7 +51,7 @@
                             <small id="emailHelp" class="form-text text-muted">Escribe un email que puedas verificar.</small>
                         @endif
                     </div>
-                    <div class="col-md-4 mb-3">
+                    <div class="form-group">
                         @if ($errors->has('password'))
                             <label for="password">Password</label>
                             <input type="password" name="password" class="form-control is-invalid" id="password" placeholder="Introduce tu contraseña">
@@ -73,7 +73,7 @@
 
             @if ($errors->any())
                 <br>
-                <div class="col-md-4 mb-3">
+                <div class="form-group">
                     <div class="alert alert-danger">
                         <h5>Por favor corrige los errores mencionados arriba</h5>
                         {{--                    <ul>--}}

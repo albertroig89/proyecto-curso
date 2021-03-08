@@ -4,15 +4,15 @@
 
 @section('content')
 
-    <div class="card" >
+    <div class="card pl-0 pr-0 col-md-4" >
         <div class="card-header"><h3>{{ $title }}</h3></div>
         <div class="card-body">
             <form method="POST" action="{{ url('usuarios') }}">
 
                 {!! csrf_field() !!}
 
-                <div class="form">
-                    <div class="col-md-4 mb-3">
+                <div class="form-group">
+                    <div class="form-group">
                         @if ($errors->has('name'))
                             <label for="name">Nombre:</label>
                             <input type="text" name="name" class="form-control is-invalid" id="name" aria-describedby="nameHelp" placeholder="Bertito tito" value="{{ old('name') }}">
@@ -32,7 +32,7 @@
                         @endif
                     </div>
 
-                    <div class="col-md-4 mb-3">
+                    <div class="form-group">
                         @if ($errors->has('email'))
                             <label for="email">Correo electronico:</label>
                             <input type="email" name="email" class="form-control is-invalid" id="email" aria-describedby="emailHelp" placeholder="bertito@example.es" value="{{ old('email') }}">
@@ -51,6 +51,14 @@
                             <small id="emailHelp" class="form-text text-muted">Escribe un email que puedas verificar.</small>
                         @endif
                     </div>
+                    <div class="form-group">
+                        <label for="bio">Bio:</label>
+                        <textarea name="bio" class="form-control" id="bio">{{ old('bio') }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="twitter">Twitter:</label>
+                        <input name="twitter" class="form-control" id="twitter" placeholder="https://twitter.com/example" value="{{ old('twitter') }}">
+                    </div>
 {{--                    <div class="col-md-4 mb-3">--}}
 {{--                        <select class="custom-select" required>--}}
 {{--                            <option value="">Selecciona tu profession</option>--}}
@@ -60,7 +68,7 @@
 {{--                        </select>--}}
 {{--                        <div class="invalid-feedback">Example invalid custom select feedback</div>--}}
 {{--                    </div> VOLIA FER UNA SELECCIO DE LA PROFESSIO AL CREAR O EDITAR USUARIS--}}
-                    <div class="col-md-4 mb-3">
+                    <div class="form-group">
                         @if ($errors->has('password'))
                             <label for="password">Password</label>
                             <input type="password" name="password" class="form-control is-invalid" id="password" placeholder="Introduce tu contraseña">
