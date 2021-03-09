@@ -51,7 +51,7 @@ class CreateUserRequest extends FormRequest
     {
         DB::transaction(function () {
 
-            $data = $this->validate();
+            $data = $this->validated();
 
             $user = User::create([
                 'name' => $data['name'],

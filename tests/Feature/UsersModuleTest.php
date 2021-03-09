@@ -86,12 +86,12 @@ class UsersModuleTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $this->post('/usuarios', [
+        $this->post('/usuarios/', [
             'name' => 'Albert',
             'email' => 'albertroiglg@gmail.com',
             'password' => '123456',
             'bio' => 'Programador de Laravel y Vue.js',
-            'twitter' => 'https://twitter.com/bertito'
+            'twitter' => 'https://twitter.com/bertito',
         ])->assertRedirect('usuarios');
         //])->assertRedirect(route('users.index')); EL MATEIX QUE LA LINEA ANTERIOR
 
