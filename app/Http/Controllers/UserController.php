@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateUserRequest;
 use App\User;
 use App\UserProfile;
 use Illuminate\Http\Request;
@@ -91,40 +92,9 @@ class UserController extends Controller
         return view('menu', compact('title'));
     }
 
-    public function store()
+    public function store(CreateUserRequest $request)
     {
-        $data = request()->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email',
-//            'email' => ['required', 'email', 'unique':users,email], FA EL MATEIX QUE LA LINEA ANTERIOR
-            'password' => 'required|min:6',
-            'bio' => 'required',
-            'twitter' => 'url'
-        ], [
-            'name.required' => 'El campo nombre es obligatorio',
-            'email.required' => 'Introduce un correo electronico',
-            'email.email' => 'Introduce un correo electronico correcto',
-            'email.unique' => 'El correo introducido ya existe',
-            'password.required' => 'Especifica una contraseña',
-            'password.min' => 'La contraseña debe contener almenos 6 caracteres'
-        ]);
-
-//        if (empty($data['name'])) {
-//            return redirect ('usuarios/nuevo')->withErrors([
-//                'name' => 'El campo nombre es obligatorio'
-//            ]);
-//        }
-
-        User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password'])
-        ]);
-
-        UserProfile::create([
-            'bio' => $data['bio'],
-            'twitter' => $data['twitter']
-        ]);
+        $request->createUser();
 
         return redirect('usuarios');
         //return redirect()->route('users.index'); EL MATEIX QUE LA LINEA ANTERIOR

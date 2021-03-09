@@ -103,7 +103,8 @@ class UsersModuleTest extends TestCase
 
         $this->assertDatabaseHas('user_profiles', [
             'bio' => 'Programador de Laravel y Vue.js',
-            'twitter' => 'https://twitter.com/bertito'
+            'twitter' => 'https://twitter.com/bertito',
+            'user_id' => User::findByEmail('albertroiglg@gmail.com')->id,
         ]);
     }
 

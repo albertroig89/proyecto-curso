@@ -19,6 +19,9 @@ class CreateUserProfilesTable extends Migration
             $table->string('bio', 1000);
             $table->string('twitter');
 
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+
             $table->timestamps();
         });
     }

@@ -86,13 +86,17 @@
            @yield('content')
         </div>
         <div class="mt-3 col-2">
-            @section('sidebar')
-                <h2>Menu</h2>
-            @show
-            <a href="{{ route('users.index') }}">Mostrar usuarios</a><br>
-            <a href="{{ route('users.create') }}">Crear usuarios</a><br>
-            <a href="../../saludo/albert">Saludo</a><br>
-            <a href="../../saludo/albert/sdarcknes">Saludo nickname</a><br>
+
+                @section('sidebar')
+                    <th><h2>Menu</h2></th>
+                @show
+                <table>
+                    <tr><td><a href="{{ route('users.index') }}">Mostrar usuarios</a></td></tr>
+                    <tr><td><a href="{{ route('users.create') }}">Crear usuarios</a></td></tr>
+                    <tr><td><a href="../../saludo/albert">Saludo</a></td></tr>
+                    <tr><td><a href="../../saludo/albert/sdarcknes">Saludo nickname</a></td></tr>
+                </table>
+
         </div>
 
     </div>
