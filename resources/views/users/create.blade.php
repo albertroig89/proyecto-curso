@@ -59,15 +59,16 @@
                         <label for="twitter">Twitter:</label>
                         <input name="twitter" class="form-control" id="twitter" placeholder="https://twitter.com/example" value="{{ old('twitter') }}">
                     </div>
-{{--                    <div class="col-md-4 mb-3">--}}
-{{--                        <select class="custom-select" required>--}}
-{{--                            <option value="">Selecciona tu profession</option>--}}
-{{--                            @foreach ($professions as $profession)--}}
-{{--                                <option value="{{ $profession->id }}">{{ $profession->title }}</option>--}}
-{{--                            @endforeach--}}
-{{--                        </select>--}}
-{{--                        <div class="invalid-feedback">Example invalid custom select feedback</div>--}}
-{{--                    </div> VOLIA FER UNA SELECCIO DE LA PROFESSIO AL CREAR O EDITAR USUARIS--}}
+                    <div class="form-group">
+                        <label for="Profession">Profession:</label>
+                        <select class="custom-select" required>
+                            <option value="">Selecciona tu profession</option>
+                            @foreach ($professions as $profession)
+                                <option name="profession" class="form-control" id="profession" value="{{ $profession->id }}">{{ $profession->title }}</option>
+                            @endforeach
+                        </select>
+                        <div class="invalid-feedback">Example invalid custom select feedback</div>
+                    </div>
                     <div class="form-group">
                         @if ($errors->has('password'))
                             <label for="password">Password</label>
@@ -105,7 +106,7 @@
 
             @if ($errors->any())
                 <br>
-                <div class="col-md-4 mb-3">
+                <div class="form-group">
                     <div class="alert alert-danger">
                         <h5>Por favor corrige los errores mencionados arriba</h5>
                         {{--                    <ul>--}}
