@@ -17,12 +17,13 @@ class UserController extends Controller
         $users = User::all();//fa el mateix que la linea anterior pero en eloquent
 
         $title = 'Listado de usuarios';
-
+//        dd($users);
         return view('users.index', compact('title', 'users'));
         
     }
     
-    public function show(User $user) {
+    public function show(User $user)
+    {
         
         $title = 'Detalles de Usuarios';
 

@@ -27,7 +27,12 @@
                             <th scope="row">{{ $user->id }}</th>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
-                            <td>{{ $user->profession()->pluck('title') }}</td>
+                              @empty($user->profession_id)
+                                  <td>No tiene profession</td>
+                              @else
+                              <td>{{ $user->profession->title }}</td>
+                              @endempty
+{{--                            <td>{{ $user->profession()->pluck('title') }}</td>--}}
                             <td><a href="{{ route('users.show', ['id' => $user->id]) }}"><span class="oi oi-eye"></span></a></td>
                             <!--<td><a href="{{ url('/usuarios/'.$user->id) }}">Ver detalles</a></td> Fa el mateix que la linea anterior-->
                             <td><a href="{{ route('users.edit', ['id' => $user->id]) }}"><span class="oi oi-pencil"></span></a></td>

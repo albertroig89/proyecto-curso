@@ -90,7 +90,7 @@ class UsersModuleTest extends TestCase
             'name' => 'Albert',
             'email' => 'albertroiglg@gmail.com',
             'password' => '123456',
-            'bio' => 'Programador de Laravel y Vue.js',
+            'bio' => 'Programador de Laravel',
             'twitter' => 'https://twitter.com/bertito',
         ])->assertRedirect('usuarios');
         //])->assertRedirect(route('users.index')); EL MATEIX QUE LA LINEA ANTERIOR
@@ -102,7 +102,7 @@ class UsersModuleTest extends TestCase
         ]);
 
         $this->assertDatabaseHas('user_profiles', [
-            'bio' => 'Programador de Laravel y Vue.js',
+            'bio' => 'Programador de Laravel',
             'twitter' => 'https://twitter.com/bertito',
             'user_id' => User::findByEmail('albertroiglg@gmail.com')->id,
         ]);
