@@ -13,40 +13,36 @@
 
                 <div class="form-group">
                     <div class="form-group">
+                        <label for="name">Nombre:</label>
                         @if ($errors->has('name'))
-                            <label for="name">Nombre:</label>
                             <input type="text" name="name" class="form-control is-invalid" id="name" aria-describedby="nameHelp" placeholder="Bertito tito" value="{{ old('name') }}">
                             <div class="invalid-feedback">
                                 {{ $errors->first('name') }}
                             </div>
                         @elseif ($errors->any())
-                            <label for="name">Nombre:</label>
                             <input type="text" name="name" class="form-control is-valid" id="name" aria-describedby="nameHelp" placeholder="Bertito tito" value="{{ old('name') }}">
                             <div class="valid-feedback">
                                 Correcto!
                             </div>
                         @else
-                            <label for="name">Nombre:</label>
                             <input type="text" name="name" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Bertito tito" value="{{ old('name') }}">
                             <small id="nameHelp" class="form-text text-muted">Escribe tu nombre.</small>
                         @endif
                     </div>
 
                     <div class="form-group">
+                        <label for="email">Correo electronico:</label>
                         @if ($errors->has('email'))
-                            <label for="email">Correo electronico:</label>
                             <input type="email" name="email" class="form-control is-invalid" id="email" aria-describedby="emailHelp" placeholder="bertito@example.es" value="{{ old('email') }}">
                             <div class="invalid-feedback">
                                 {{ $errors->first('email') }}
                             </div>
                         @elseif ($errors->any())
-                            <label for="email">Correo electronico:</label>
                             <input type="email" name="email" class="form-control is-valid" id="email" aria-describedby="emailHelp" placeholder="bertito@example.es" value="{{ old('email') }}">
                             <div class="valid-feedback">
                                 Correcto!
                             </div>
                         @else
-                            <label for="email">Correo electronico:</label>
                             <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="bertito@example.es" value="{{ old('email') }}">
                             <small id="emailHelp" class="form-text text-muted">Escribe un email que puedas verificar.</small>
                         @endif
@@ -108,7 +104,7 @@
                 <br>
                 <div class="form-group">
                     <div class="alert alert-danger">
-                        <h5>Por favor corrige los errores mencionados arriba</h5>
+                        <h5>Por favor corrige los errores mencionados arriba {{ $errors }}</h5>
                         {{--                    <ul>--}}
                         {{--                        @foreach ($errors->all() as $error)--}}
                         {{--                            <li>{{ $error }}</li>--}}

@@ -26,6 +26,7 @@ class CreateUserRequest extends FormRequest
     public function rules()
     {
         return [
+            'profession_id' => ['nullable'],
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
 //            'email' => ['required', 'email', 'unique':users,email], FA EL MATEIX QUE LA LINEA ANTERIOR
@@ -54,6 +55,7 @@ class CreateUserRequest extends FormRequest
             $data = $this->validated();
 
             $user = User::create([
+                'profession_id' => $data['profession_id'],
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => bcrypt($data['password'])
