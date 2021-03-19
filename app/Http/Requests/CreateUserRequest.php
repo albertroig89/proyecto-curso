@@ -54,6 +54,8 @@ class CreateUserRequest extends FormRequest
 
             $data = $this->validated();
 
+
+
             $user = User::create([
                 'profession_id' => $data['profession_id'],
                 'name' => $data['name'],
@@ -65,6 +67,8 @@ class CreateUserRequest extends FormRequest
                 'bio' => $data['bio'],
                 'twitter' => $data['twitter'],
             ]);
+
+//            dd($user);
         });
     }
 }

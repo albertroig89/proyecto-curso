@@ -56,11 +56,11 @@
                         <input name="twitter" class="form-control" id="twitter" placeholder="https://twitter.com/example" value="{{ old('twitter') }}">
                     </div>
                     <div class="form-group">
-                        <label for="Profession">Profession:</label>
-                        <select class="custom-select" required>
-                            <option value="">Selecciona tu profession</option>
+                        <label for="profession_id">Profession:</label>
+                        <select class="form-control" name="profession_id" id="profession_id" value="{{ old('profession_id') }}" required>
+                            <option>Selecciona tu profession</option>
                             @foreach ($professions as $profession)
-                                <option name="profession" class="form-control" id="profession" value="{{ $profession->id }}">{{ $profession->title }}</option>
+                                <option class="form-control"value="{{ $profession->id }}">{{ $profession->title }}</option>
                             @endforeach
                         </select>
                         <div class="invalid-feedback">Example invalid custom select feedback</div>
