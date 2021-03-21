@@ -60,7 +60,8 @@
                         <select class="form-control" name="profession_id" id="profession_id" value="{{ old('profession_id') }}" required>
                             <option>Selecciona tu profession</option>
                             @foreach ($professions as $profession)
-                                <option class="form-control"value="{{ $profession->id }}">{{ $profession->title }}</option>
+{{--                                {{ $professionId = Profession::where('title', $profession->title)->value('id') }}--}}
+                                <option class="form-control"value="{{ ($profession->id) }}">{{ $profession->title }}</option>
                             @endforeach
                         </select>
                         <div class="invalid-feedback">Example invalid custom select feedback</div>

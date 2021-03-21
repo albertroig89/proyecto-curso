@@ -10,7 +10,9 @@ class Profession extends Model
     
     //public $timestamps = false; NO GUARDARIA EL DIA I HORA QUE S'HA CREAT LA PROFESSIO
     
-    protected $fillable = ['title'];
+    protected $fillable = [
+        'title',
+    ];
     
     public function users()
     {

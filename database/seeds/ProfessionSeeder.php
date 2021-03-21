@@ -38,7 +38,7 @@ class ProfessionSeeder extends Seeder
             'title' => 'Tecnico informatico',
         ]);
         
-        DB::table('professions')->where('title', 'Tecnico informatico')->delete(); //EXERCICI 13 FET EN CONSTRUCTOR DE CONSULTES DE LARAVEL
+//        DB::table('professions')->where('title', 'Tecnico informatico')->delete(); EXERCICI 13 FET EN CONSTRUCTOR DE CONSULTES DE LARAVEL
         
         
         //DB::delete('DELETE FROM professions WHERE (title) = (:title)', ['title' => 'Tecnico informatico']);

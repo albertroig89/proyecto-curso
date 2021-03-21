@@ -54,10 +54,8 @@ class CreateUserRequest extends FormRequest
 
             $data = $this->validated();
 
-
-
             $user = User::create([
-                'profession_id' => $data['profession_id'],
+                'profession_id' => intval($data['profession_id']),
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => bcrypt($data['password'])

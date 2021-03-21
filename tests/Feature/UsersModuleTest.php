@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\User;
+use App\Profession;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -85,24 +86,31 @@ class UsersModuleTest extends TestCase
     function it_creates_a_new_user()
     {
         $this->withoutExceptionHandling();
-
+        $profession = Profession::all();
+        dump($profession);
+//        $professionId = Profession::where('title', 'Desarrollador back-end')->value('id');
+//        dump($professionId);
         $this->post('/usuarios/', [
+//            'profession_id' => 1,
+            'profession_id' => 3,
             'name' => 'Albert',
             'email' => 'albertroiglg@gmail.com',
             'password' => '123456',
-            'bio' => 'Programador de Laravel',
+            'bio' => 'Trabajo en microdelta, me gustan las motos',
             'twitter' => 'https://twitter.com/bertito',
         ])->assertRedirect('usuarios');
         //])->assertRedirect(route('users.index')); EL MATEIX QUE LA LINEA ANTERIOR
 
         $this->assertCredentials([
+//            'profession_id' => 1,
+            'profession_id' => 3,
             'name' => 'Albert',
             'email' => 'albertroiglg@gmail.com',
             'password' => '123456'
         ]);
 
         $this->assertDatabaseHas('user_profiles', [
-            'bio' => 'Programador de Laravel',
+            'bio' => 'Trabajo en microdelta, me gustan las motos',
             'twitter' => 'https://twitter.com/bertito',
             'user_id' => User::findByEmail('albertroiglg@gmail.com')->id,
         ]);
