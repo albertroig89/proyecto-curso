@@ -86,16 +86,16 @@ class UsersModuleTest extends TestCase
     function it_creates_a_new_user()
     {
         $this->withoutExceptionHandling();
-        $profession = Profession::all();
-        dump($profession);
+//        $profession = Profession::all();
+//        dump($profession);
 //        $professionId = Profession::where('title', 'Desarrollador back-end')->value('id');
 //        dump($professionId);
         $this->post('/usuarios/', [
 //            'profession_id' => 1,
-            'profession_id' => 3,
             'name' => 'Albert',
             'email' => 'albertroiglg@gmail.com',
             'password' => '123456',
+            'profession_id' => 1,
             'bio' => 'Trabajo en microdelta, me gustan las motos',
             'twitter' => 'https://twitter.com/bertito',
         ])->assertRedirect('usuarios');
@@ -103,10 +103,10 @@ class UsersModuleTest extends TestCase
 
         $this->assertCredentials([
 //            'profession_id' => 1,
-            'profession_id' => 3,
             'name' => 'Albert',
             'email' => 'albertroiglg@gmail.com',
-            'password' => '123456'
+            'password' => '123456',
+            'profession_id' => 1,
         ]);
 
         $this->assertDatabaseHas('user_profiles', [

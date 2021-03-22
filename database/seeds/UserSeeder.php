@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
             'name' => 'Albert Roig',
             'email' => 'albertroiglg@gmail.com',
             'password' => bcrypt('laravel'),
-            'profession_id' => $professionId,
+            'profession_id' => 4,
             'is_admin' => true
         ]);
         
@@ -35,7 +35,7 @@ class UserSeeder extends Seeder
             'name' => 'Joan Roig',
             'email' => 'joanroig@gmail.com',
             'password' => bcrypt('laravel2'),
-            'profession_id' => '2'
+            'profession_id' => 2,
         ]); //EXERCICI TEMA 13 FET EN CONSTRUCTOR DE CONSULTES DE LARAVEL
         
          User::create([
@@ -49,7 +49,7 @@ class UserSeeder extends Seeder
             'name' => 'Andreu Roig',
             'email' => 'andreubou@gmail.com',
             'password' => bcrypt('laravel4'),
-            'profession_id' => $professionId
+            'profession_id' => 3
         ]);
         
         factory(User::class)->create([  //Crea usuari en nom aleatori i les dades que yo li paso

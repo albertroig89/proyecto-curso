@@ -57,11 +57,12 @@
                     </div>
                     <div class="form-group">
                         <label for="profession_id">Profession:</label>
-                        <select class="form-control" name="profession_id" id="profession_id" value="{{ old('profession_id') }}" required>
-                            <option>Selecciona tu profession</option>
+                        <select class="form-control" name="profession_id" id="profession_id">
+                            <option value="">Selecciona tu profession</option>
                             @foreach ($professions as $profession)
 {{--                                {{ $professionId = Profession::where('title', $profession->title)->value('id') }}--}}
-                                <option class="form-control"value="{{ ($profession->id) }}">{{ $profession->title }}</option>
+
+                                <option class="form-control" value="{{ ($profession->id) }}">{{ $profession->title }}</option>
                             @endforeach
                         </select>
                         <div class="invalid-feedback">Example invalid custom select feedback</div>
