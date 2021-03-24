@@ -95,7 +95,7 @@ class UsersModuleTest extends TestCase
             'name' => 'Albert',
             'email' => 'albertroiglg@gmail.com',
             'password' => '123456',
-            'profession_id' => 1,
+            'profession_id' => 2,
             'bio' => 'Trabajo en microdelta, me gustan las motos',
             'twitter' => 'https://twitter.com/bertito',
         ])->assertRedirect('usuarios');
@@ -106,7 +106,7 @@ class UsersModuleTest extends TestCase
             'name' => 'Albert',
             'email' => 'albertroiglg@gmail.com',
             'password' => '123456',
-            'profession_id' => 1,
+            'profession_id' => 2,
         ]);
 
         $this->assertDatabaseHas('user_profiles', [

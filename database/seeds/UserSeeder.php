@@ -42,14 +42,13 @@ class UserSeeder extends Seeder
             'name' => 'Lidia Albiol',
             'email' => 'mtlidia55@gmail.com',
             'password' => bcrypt('laravel3'),
-            'profession_id' => null
         ]);
          
           User::create([
-            'name' => 'Andreu Roig',
-            'email' => 'andreubou@gmail.com',
-            'password' => bcrypt('laravel4'),
-            'profession_id' => 3
+                'name' => 'Andreu Roig',
+                'email' => 'andreubou@gmail.com',
+                'password' => bcrypt('laravel4'),
+                'profession_id' => 3,
         ]);
         
         factory(User::class)->create([  //Crea usuari en nom aleatori i les dades que yo li paso
@@ -59,7 +58,7 @@ class UserSeeder extends Seeder
         ]);
         
         factory(User::class)->create([  //Crea usuari en dades aleatories pero en la professio en id 3
-            'profession_id' => 3
+            'profession_id' => 3,
         ]);
         
         factory(User::class)->create(); //Crea un usuari en dades aleatories

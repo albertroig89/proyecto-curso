@@ -16,6 +16,16 @@
         @else
             <p>Profession: {{ $user->profession->title }}</p>
         @endempty
+        @empty($user->user_profile->twitter)
+            <p>No tiene twitter</p>
+        @else
+            <p>Twitter: {{ $user->user_profile->twitter }}</p>
+        @endempty
+        @empty($user->user_profile->bio)
+            <p>No tiene biografia</p>
+        @else
+            <p>Biografia: {{ $user->user_profile->bio }}</p>
+        @endempty
         <p><a href="{{ route('users.index') }}">Regresar al listado de usuarios</a></p>
         </div>
     </div>

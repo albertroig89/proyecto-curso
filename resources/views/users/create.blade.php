@@ -49,7 +49,16 @@
                     </div>
                     <div class="form-group">
                         <label for="bio">Bio:</label>
-                        <textarea name="bio" class="form-control" id="bio">{{ old('bio') }}</textarea>
+                        @if ($errors->has('bio'))
+                        <textarea name="bio" class="form-control is-invalid" id="bio">{{ old('bio') }}</textarea>
+                        @elseif ($errors->any())
+                            <textarea name="bio" class="form-control is-valid" id="bio">{{ old('bio') }}</textarea>
+                            <div class="valid-feedback">
+                                Correcto!
+                            </div>
+                        @else
+                            <textarea name="bio" class="form-control" id="bio">{{ old('bio') }}</textarea>
+                        @endif
                     </div>
                     <div class="form-group">
                         <label for="twitter">Twitter:</label>
@@ -62,7 +71,7 @@
                             @foreach ($professions as $profession)
 {{--                                {{ $professionId = Profession::where('title', $profession->title)->value('id') }}--}}
 
-                                <option class="form-control" value="{{ ($profession->id) }}">{{ $profession->title }}</option>
+                                <option class="form-control" value="{{ (intval($profession->id)) }}">{{ $profession->title }}</option>
                             @endforeach
                         </select>
                         <div class="invalid-feedback">Example invalid custom select feedback</div>
