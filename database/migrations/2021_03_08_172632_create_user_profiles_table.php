@@ -17,7 +17,7 @@ class CreateUserProfilesTable extends Migration
             $table->increments('id');
 
             $table->string('bio', 1000);
-            $table->string('twitter');
+            $table->string('twitter')->nullable();
 
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

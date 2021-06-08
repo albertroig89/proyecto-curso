@@ -61,7 +61,9 @@ class CreateUserRequest extends FormRequest
 
             $user->profile()->create([
                 'bio' => $data['bio'],
-                'twitter' => $data['twitter'],
+                'twitter' => array_get($data,'twitter'),
+//                'twitter' => $data['twitter'] ?? null,  FA EL MATEIX QUE LINIA ANTERIOR PERO EN HELPER DE LARAVEL
+//                'twitter' => $this->twitter,  FA EL MATEIX QUE LES DOS ANTERIORS
             ]);
         });
     }
