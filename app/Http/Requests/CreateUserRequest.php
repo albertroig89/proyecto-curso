@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class CreateUserRequest extends FormRequest
 {
@@ -31,7 +32,12 @@ class CreateUserRequest extends FormRequest
 //            'email' => ['required', 'email', 'unique':users,email], FA EL MATEIX QUE LA LINEA ANTERIOR
             'password' => 'required|min:6',
             'bio' => 'required',
-            'twitter' => ['nullable', 'url']
+            'twitter' => ['nullable', 'present', 'url'],
+            'profession_id' => [
+                'nullable', 'present',
+                Rule::exists('professions', 'id')->whereNull('deleted_at')
+//            ->where('selectable', true),
+            ],
         ];
     }
 
@@ -56,13 +62,14 @@ class CreateUserRequest extends FormRequest
             $user = User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
-                'password' => bcrypt($data['password'])
-            ]);
+                'password' => bcrypt($data['password']),
+                ]);
 
             $user->profile()->create([
                 'bio' => $data['bio'],
-                'twitter' => array_get($data,'twitter'),
-//                'twitter' => $data['twitter'] ?? null,  FA EL MATEIX QUE LINIA ANTERIOR PERO EN HELPER DE LARAVEL
+                'twitter' => $data['twitter'],
+                'profession_id' => $data['profession_id'],
+//                'twitter' => array_get($data,'twitter'),  FA EL MATEIX QUE LINIA ANTERIOR PERO EN HELPER DE LARAVEL
 //                'twitter' => $this->twitter,  FA EL MATEIX QUE LES DOS ANTERIORS
             ]);
         });

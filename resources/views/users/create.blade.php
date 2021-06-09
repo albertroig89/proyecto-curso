@@ -55,6 +55,19 @@
                         <label for="bio">Bio:</label>
                         <textarea name="bio" class="form-control" id="bio">{{ old('bio') }}</textarea>
                     </div>
+
+                    <div class="form-group">
+                        <label for="profession_id">Profesión</label>
+                        <select name="profession_id" id="profession_id" class="form-control">
+                            <option value="">Selecciona una professión</option>
+                            @foreach($professions as $profession)
+                                <option value="{{ $profession->id }}"{{ old('profession_id') == $profession->id ? ' selected' : ''}}>
+                                    {{ $profession->title }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
                     <div class="form-group">
                         <label for="twitter">Twitter:</label>
                         <input name="twitter" class="form-control" id="twitter" placeholder="https://twitter.com/example" value="{{ old('twitter') }}">
