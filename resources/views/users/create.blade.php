@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <div class="card pl-0 pr-0 col-md-4" >
+    <div class="card pl-0 pr-0 col-md-8" >
         <div class="card-header"><h3>{{ $title }}</h3></div>
         <div class="card-body">
             <form method="POST" action="{{ url('usuarios') }}">
@@ -128,27 +128,28 @@
                             <small id="emailHelp" class="form-text text-muted">Minimo 6 caracteres.</small>
                         @endif
                     </div>
+
+                    <h5>Habilidades</h5>
+
+                    @foreach($skills as $skill)
+                        <div class="form-check form-check-inline">
+                            <input name="skills[{{ $skill->id }}]"
+                                   class="form-check-input"
+                                   type="checkbox"
+                                   id="skill_{{ $skill->id }}"
+                                   value="{{ $skill->id }}"
+                                    {{ old("skills.{$skill->id}") ? 'checked' : '' }}>
+                            <label class="form-check-label" for="skill_{{ $skill->id }}">{{ $skill->name }}</label>
+                        </div>
+                    @endforeach
+
+
                 </div>
-                {{--                <div class="form-group">--}}
-                {{--                        <div class="form-check">--}}
-                {{--                                <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required>--}}
-                {{--                                <label class="form-check-label" for="invalidCheck3">--}}
-                {{--                                        Agree to terms and conditions--}}
-                {{--                                </label>--}}
-                {{--                                --}}
-                {{--                                <div class="invalid-feedback">--}}
-                {{--                                        @if ($errors->has('checkbox'))--}}
-                {{--                                                <div class="invalid-feedback">--}}
-                {{--                                                        <p>{{ $errors->first('password') }}</p>--}}
-                {{--                                                </div>--}}
-                {{--                                        @endif--}}
-                {{--                                </div>--}}
-                {{--                        </div>--}}
-                {{--                </div>--}}
-                <button type="submit" class="btn btn-primary">Crear usuario</button>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Crear usuario</button>
+                    <a class="float-right btn btn-primary" href="{{ route('users.index') }}">Regresar al listado de usuarios</a>
+                </div>
             </form>
-            <br>
-            <p><a href="{{ route('users.index') }}">Regresar al listado de usuarios</a></p>
 
             @if ($errors->any())
                 <br>
