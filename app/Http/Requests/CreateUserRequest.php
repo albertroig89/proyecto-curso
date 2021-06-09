@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Profession;
 use App\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\DB;
@@ -35,9 +36,12 @@ class CreateUserRequest extends FormRequest
             'twitter' => ['nullable', 'present', 'url'],
             'profession_id' => [
                 'nullable', 'present',
-                Rule::exists('professions', 'id')->whereNull('deleted_at')
+                Rule::exists('professions', 'id')->where('selectable', true),
+                'required_without:other_profession'
+                ],
+//                Rule::exists('professions', 'id')->whereNull('deleted_at')  //Per a la proba only_not_deleted_professions_can_be_selected()
 //            ->where('selectable', true),
-            ],
+            'other_profession' => 'required_without:profession_id',
         ];
     }
 
@@ -49,7 +53,9 @@ class CreateUserRequest extends FormRequest
             'email.email' => 'Introduce un correo electronico correcto',
             'email.unique' => 'El correo introducido ya existe',
             'password.required' => 'Especifica una contraseña',
-            'password.min' => 'La contraseña debe contener almenos 6 caracteres'
+            'password.min' => 'La contraseña debe contener almenos 6 caracteres',
+            'profession_id.required_without' => 'Selecciona una professión o introduce una manualmente',
+            'other_profession.required_without' => 'Sino has encontrado la tuya puedes escribir-la aqui',
         ];
     }
 
@@ -58,6 +64,18 @@ class CreateUserRequest extends FormRequest
         DB::transaction(function () {
 
             $data = $this->validated();
+
+
+            //Si no arriba la variable profession_id es perque arriba other_profession, llavors, creem la nova professio per a poder insertar-la
+            if(is_null($data['profession_id'])){
+                $profession_id = Profession::create([
+                    'title'=> $data['other_profession'],
+                ])->id;
+            }else{
+                $profession_id = $data['profession_id'];
+            }
+
+
 
             $user = User::create([
                 'name' => $data['name'],
@@ -68,7 +86,7 @@ class CreateUserRequest extends FormRequest
             $user->profile()->create([
                 'bio' => $data['bio'],
                 'twitter' => $data['twitter'],
-                'profession_id' => $data['profession_id'],
+                'profession_id' => $profession_id,
 //                'twitter' => array_get($data,'twitter'),  FA EL MATEIX QUE LINIA ANTERIOR PERO EN HELPER DE LARAVEL
 //                'twitter' => $this->twitter,  FA EL MATEIX QUE LES DOS ANTERIORS
             ]);

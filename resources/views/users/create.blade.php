@@ -58,29 +58,63 @@
 
                     <div class="form-group">
                         <label for="profession_id">Profesión</label>
-                        <select name="profession_id" id="profession_id" class="form-control">
-                            <option value="">Selecciona una professión</option>
-                            @foreach($professions as $profession)
-                                <option value="{{ $profession->id }}"{{ old('profession_id') == $profession->id ? ' selected' : ''}}>
-                                    {{ $profession->title }}
-                                </option>
-                            @endforeach
-                        </select>
+                        @if ($errors->has('profession_id'))
+                            <select name="profession_id" id="profession_id" class="form-control is-invalid">
+                                <option value="">Selecciona una professión</option>
+                                @foreach($professions as $profession)
+                                    <option value="{{ $profession->id }}"{{ old('profession_id') == $profession->id ? ' selected' : ''}}>
+                                        {{ $profession->title }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <div class="invalid-feedback">
+                                {{ $errors->first('profession_id') }}
+                            </div>
+                        @elseif ($errors->any())
+                            <select name="profession_id" id="profession_id" class="form-control is-valid">
+                                <option value="">Selecciona una professión</option>
+                                @foreach($professions as $profession)
+                                    <option value="{{ $profession->id }}"{{ old('profession_id') == $profession->id ? ' selected' : ''}}>
+                                        {{ $profession->title }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <div class="valid-feedback">
+                                Correcto!
+                            </div>
+                        @else
+                            <select name="profession_id" id="profession_id" class="form-control">
+                                <option value="">Selecciona una professión</option>
+                                @foreach($professions as $profession)
+                                    <option value="{{ $profession->id }}"{{ old('profession_id') == $profession->id ? ' selected' : ''}}>
+                                        {{ $profession->title }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        @endif
+                    </div>
+
+                    <div class="form-group">
+                        <label for="other_profession">Otra profesión: </label>
+                        @if ($errors->has('other_profession'))
+                            <input type="text" class="form-control is-invalid" name="other_profession" id="other_profession" placeholder="Rellena esto sino esta tu profesión" value="{{old('other_profession')}}">
+                            <div class="invalid-feedback">
+                                {{ $errors->first('other_profession') }}
+                            </div>
+                        @elseif ($errors->any())
+                            <input type="text" class="form-control is-valid" name="other_profession" id="other_profession" placeholder="Rellena esto sino esta tu profesión" value="{{old('other_profession')}}">
+                            <div class="valid-feedback">
+                                Correcto!
+                            </div>
+                        @else
+                            <input type="text" class="form-control" name="other_profession" id="other_profession" placeholder="Rellena esto sino esta tu profesión" value="{{old('other_profession')}}">
+                        @endif
                     </div>
 
                     <div class="form-group">
                         <label for="twitter">Twitter:</label>
                         <input name="twitter" class="form-control" id="twitter" placeholder="https://twitter.com/example" value="{{ old('twitter') }}">
                     </div>
-{{--                    <div class="col-md-4 mb-3">--}}
-{{--                        <select class="custom-select" required>--}}
-{{--                            <option value="">Selecciona tu profession</option>--}}
-{{--                            @foreach ($professions as $profession)--}}
-{{--                                <option value="{{ $profession->id }}">{{ $profession->title }}</option>--}}
-{{--                            @endforeach--}}
-{{--                        </select>--}}
-{{--                        <div class="invalid-feedback">Example invalid custom select feedback</div>--}}
-{{--                    </div> VOLIA FER UNA SELECCIO DE LA PROFESSIO AL CREAR O EDITAR USUARIS--}}
                     <div class="form-group">
                         @if ($errors->has('password'))
                             <label for="password">Password</label>
@@ -118,14 +152,14 @@
 
             @if ($errors->any())
                 <br>
-                <div class="col-md-4 mb-3">
+                <div>
                     <div class="alert alert-danger">
                         <h5>Por favor corrige los errores mencionados arriba</h5>
-                        {{--                    <ul>--}}
-                        {{--                        @foreach ($errors->all() as $error)--}}
-                        {{--                            <li>{{ $error }}</li>--}}
-                        {{--                        @endforeach--}}
-                        {{--                    </ul>--}}
+{{--                            <ul>--}}
+{{--                                @foreach ($errors->all() as $error)--}}
+{{--                                    <li>{{ $error }}</li>--}}
+{{--                                @endforeach--}}
+{{--                            </ul>--}}
                     </div>
                 </div>
             @endif
@@ -133,4 +167,16 @@
     </div>
 
 
+@endsection
+
+@section('jquery')
+    @parent
+    console.log('Template: create.blade.php');
+    $('#profession_id').on('change', function() {
+        if( this.value != "" ){
+            $('#other_profession').parent().hide();
+        }else{
+            $('#other_profession').parent().show();
+        }
+    });
 @endsection

@@ -139,14 +139,18 @@ class UsersModuleTest extends TestCase
     /**
      * @test
      */
-    function the_profession_id_field_is_optional()
+    function the_profession_id_is_absent_but_another_profession_is_passed()
     {
         $this->withoutExceptionHandling();
 
         $this->post('/usuarios/', $this->getValidData([
             'profession_id' => null,
+            'other_profession' => 'new profession'
         ]))->assertRedirect(route('users.index'));
         //->assertRedirect('usuarios'); EL MATEIX QUE LA LINEA ANTERIOR
+
+        //Obtenim la nova professió (other_profession) que s'incerta al no posar el (profession_id)
+        $other_profession = Profession::where('title', 'new profession')->orderBy('id', 'DESC')->get()->last()->id;
 
         $this->assertCredentials([
             'name' => 'Albert',
@@ -157,7 +161,31 @@ class UsersModuleTest extends TestCase
         $this->assertDatabaseHas('user_profiles', [
             'bio' => 'Programador de Laravel y Vue.js',
             'user_id' => User::findByEmail('albertroiglg@gmail.com')->id,
-            'profession_id' => null,
+            'profession_id' => $other_profession,
+        ]);
+    }
+
+    /**
+     * @test
+     */
+    function the_other_profession_is_absent_but_profession_id_is_passed()
+    {
+        $this->withoutExceptionHandling();
+
+        $this->post('/usuarios/', $this->getValidData([
+            'other_profession' => null
+        ]))->assertRedirect(route('users.index'));
+
+        $this->assertCredentials([
+            'name' => 'Albert',
+            'email' => 'albertroiglg@gmail.com',
+            'password' => '123456',
+        ]);
+
+        $this->assertDatabaseHas('user_profiles', [
+            'bio' => 'Programador de Laravel y Vue.js',
+            'user_id' => User::findByEmail('albertroiglg@gmail.com')->id,
+            'profession_id' => $this->profession->id,
         ]);
     }
 
@@ -274,24 +302,24 @@ class UsersModuleTest extends TestCase
 //        $this->assertDatabaseEmpty('users');
 //    }
 
-    /**
-     * @test
-     */
-    function only_not_deleted_professions_can_be_selected()
-    {
-        $deletedProfession = factory(Profession::class)->create([
-            'deleted_at' => now()->format('Y-m-d'),
-        ]);
-
-        $this->from('usuarios/nuevo')
-            ->post('/usuarios', $this->getValidData([
-                'profession_id' => $deletedProfession->id,
-            ]))
-            ->assertRedirect('usuarios/nuevo')
-            ->assertSessionHasErrors(['profession_id']);
-
-        $this->assertDatabaseEmpty('users');
-    }
+//    /**
+//     * @test
+//     */
+//    function only_not_deleted_professions_can_be_selected()
+//    {
+//        $deletedProfession = factory(Profession::class)->create([
+//            'deleted_at' => now()->format('Y-m-d'),
+//        ]);
+//
+//        $this->from('usuarios/nuevo')
+//            ->post('/usuarios', $this->getValidData([
+//                'profession_id' => $deletedProfession->id,
+//            ]))
+//            ->assertRedirect('usuarios/nuevo')
+//            ->assertSessionHasErrors(['profession_id']);
+//
+//        $this->assertDatabaseEmpty('users');
+//    }
 
     /**
      * @test
