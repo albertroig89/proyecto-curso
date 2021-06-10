@@ -116,6 +116,7 @@ class UsersModuleTest extends TestCase
             'name' => 'Albert',
             'email' => 'albertroiglg@gmail.com',
             'password' => '123456',
+            'role' => 'user',
         ]);
 
         $user = User::findByEmail('albertroiglg@gmail.com');
@@ -163,6 +164,39 @@ class UsersModuleTest extends TestCase
             'twitter' => null,
             'user_id' => User::findByEmail('albertroiglg@gmail.com')->id,
         ]);
+    }
+
+    /**
+     * @test
+     */
+    function the_role_field_is_optional()
+    {
+        $this->withoutExceptionHandling();
+
+        $this->post('/usuarios/', $this->getValidData([
+            'role' => null,
+        ]))->assertRedirect(route('users.index'));
+        //->assertRedirect('usuarios'); EL MATEIX QUE LA LINEA ANTERIOR
+
+        $this->assertDatabaseHas('users', [
+            'email' => 'albertroiglg@gmail.com',
+            'role' => 'user'
+        ]);
+    }
+
+    /**
+     * @test
+     */
+    function the_role_must_be_valid()
+    {
+        $this->handleValidationExceptions();
+
+        $this->post('/usuarios/', $this->getValidData([
+            'role' => 'invalid-role',
+        ]))->assertSessionHasErrors('role');
+        //->assertRedirect('usuarios'); EL MATEIX QUE LA LINEA ANTERIOR
+
+        $this->assertDatabaseEmpty('users');
     }
 
     /**
@@ -581,6 +615,7 @@ class UsersModuleTest extends TestCase
             'profession_id' => $this->profession->id,
             'bio' => 'Programador de Laravel y Vue.js',
             'twitter' => 'https://twitter.com/bertito',
+            'role' => 'user',
         ], $custom);
     }
 
