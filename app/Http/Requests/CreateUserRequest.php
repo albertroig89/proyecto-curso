@@ -42,6 +42,10 @@ class CreateUserRequest extends FormRequest
 //                Rule::exists('professions', 'id')->whereNull('deleted_at')  //Per a la proba only_not_deleted_professions_can_be_selected()
 //            ->where('selectable', true),
             'other_profession' => 'required_without:profession_id',
+            'skills' => [
+                'array',
+                Rule::exists('skills', 'id'),
+            ],
         ];
     }
 
@@ -90,6 +94,11 @@ class CreateUserRequest extends FormRequest
 //                'twitter' => array_get($data,'twitter'),  FA EL MATEIX QUE LINIA ANTERIOR PERO EN HELPER DE LARAVEL
 //                'twitter' => $this->twitter,  FA EL MATEIX QUE LES DOS ANTERIORS
             ]);
+
+            if (! empty ($data['skills'])) {
+                $user->skills()->attach($data['skills']);
+            }
+//            $user->skills()->attach($data['skills'] ?? []); FA EL MATEIX QUE LES LINIES ANTERIORS
         });
     }
 }
