@@ -93,26 +93,12 @@
         <div class="mt-3 col-10">
            @yield('content')
         </div>
-{{--        <div class="mt-3 col-2">--}}
-
-{{--                @section('sidebar')--}}
-{{--                    <th><h2>Menu</h2></th>--}}
-{{--                @show--}}
-{{--                <table>--}}
-{{--                    <tr><td><a href="{{ route('users.index') }}">Mostrar usuarios</a></td></tr>--}}
-{{--                    <tr><td><a href="{{ route('users.create') }}">Crear usuarios</a></td></tr>--}}
-{{--                    <tr><td><a href="../../saludo/albert">Saludo</a></td></tr>--}}
-{{--                    <tr><td><a href="../../saludo/albert/sdarcknes">Saludo nickname</a></td></tr>--}}
-{{--                </table>--}}
-
-{{--        </div>--}}
-
     </div>
 </main>
 
 <footer class="footer mt-auto py-3 bg-light">
   <div class="container">
-    <span class="text-muted">Pie de pagina proyecto laravel</span>
+    <span class="text-muted">Proyecto curso Styde Albert Roig</span>
   </div>
 </footer>
 
