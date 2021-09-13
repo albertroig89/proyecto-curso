@@ -108,6 +108,9 @@ class CreateUsersTest extends TestCase
      */
     function the_profession_id_is_absent_but_another_profession_is_passed()
     {
+
+        $this->withoutExceptionHandling();
+
         $this->post('/usuarios/', $this->withData([
             'profession_id' => null,
             'other_profession' => 'new profession'
@@ -135,6 +138,8 @@ class CreateUsersTest extends TestCase
      */
     function the_other_profession_is_absent_but_profession_id_is_passed()
     {
+        $profession = factory(Profession::class)->create();
+
         $this->post('/usuarios/', $this->withData([
             'other_profession' => null
         ]));
@@ -148,7 +153,7 @@ class CreateUsersTest extends TestCase
         $this->assertDatabaseHas('user_profiles', [
             'bio' => 'Programador de Laravel y Vue.js',
             'user_id' => User::findByEmail('albertroiglg@gmail.com')->id,
-            'profession_id' => $this->profession->id,
+            'profession_id' => $profession->id,
         ]);
     }
 
@@ -226,9 +231,11 @@ class CreateUsersTest extends TestCase
      */
     function the_twitter_field_is_optional()
     {
+        $this->withoutExceptionHandling();
+
         $this->post('/usuarios/', $this->withData([
             'twitter' => null,
-        ]));
+        ]))->assertRedirect(route('users.index'));
         //->assertRedirect('usuarios'); EL MATEIX QUE LA LINEA ANTERIOR
 
         $this->assertCredentials([
@@ -249,6 +256,8 @@ class CreateUsersTest extends TestCase
      */
     function the_role_field_is_optional()
     {
+        $this->withoutExceptionHandling();
+
         $this->post('/usuarios/', $this->withData([
             'role' => null,
         ]))->assertRedirect(route('users.index'));
