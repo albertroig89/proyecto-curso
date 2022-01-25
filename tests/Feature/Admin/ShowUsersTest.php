@@ -29,6 +29,8 @@ class ShowUsersTest extends TestCase
      */
     function it_displays_a_404_error_if_the_user_is_not_found()
     {
+        $this->withExceptionHandling();
+
         $this->get('/usuarios/999')
             ->assertStatus(404)
             ->assertSee('Página no encontrada');

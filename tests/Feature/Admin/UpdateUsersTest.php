@@ -65,6 +65,8 @@ class UpdateUsersTest extends TestCase
      */
     function the_name_is_required()
     {
+        $this->handleValidationExceptions();
+
         $user = factory(User::class)->create();
 
         $this->from("usuarios/{$user->id}/editar")
@@ -84,6 +86,8 @@ class UpdateUsersTest extends TestCase
      */
     function the_email_must_be_valid()
     {
+        $this->handleValidationExceptions();
+
         $user = factory(User::class)->create();
 
         $this->from("usuarios/{$user->id}/editar")
@@ -103,6 +107,8 @@ class UpdateUsersTest extends TestCase
      */
     function the_email_must_be_unique()
     {
+        $this->handleValidationExceptions();
+
         factory(User::class)->create([
             'email' => 'existing-email@example.com'
         ]);

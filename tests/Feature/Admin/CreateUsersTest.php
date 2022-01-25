@@ -94,6 +94,8 @@ class CreateUsersTest extends TestCase
      */
     function the_skills_must_be_an_array()
     {
+        $this->handleValidationExceptions();
+
         $this->from('usuarios/nuevo')
             ->post('/usuarios', $this->withData([
                 'skills' => 'PHP, JS',
@@ -162,8 +164,11 @@ class CreateUsersTest extends TestCase
      */
     function the_user_is_redirected_to_the_previous_page_when_the_violation_fails()
     {
+        $this->handleValidationExceptions();
+
         $this->from('usuarios/nuevo')
-            ->post('/usuarios', []);
+            ->post('/usuarios', [])
+            ->assertRedirect('usuarios/nuevo');
 
         $this->assertDatabaseEmpty('users');
     }
@@ -173,6 +178,8 @@ class CreateUsersTest extends TestCase
      */
     function the_name_is_required()
     {
+        $this->handleValidationExceptions();
+
         $this->post('/usuarios', $this->withData([
                 'name' => '',
             ]))
@@ -186,6 +193,8 @@ class CreateUsersTest extends TestCase
      */
     function the_email_is_required()
     {
+        $this->handleValidationExceptions();
+
         $this->post('/usuarios', $this->withData([
                 'email' => '',
             ]))
@@ -218,12 +227,14 @@ class CreateUsersTest extends TestCase
             'email' => 'albertroiglg@gmail.com'
         ]);
 
+        $this->handleValidationExceptions();
+
         $this->post('/usuarios', $this->withData([
                 'email' => 'albertroiglg@gmail.com'
             ]))
             ->assertSessionHasErrors(['email' => 'El correo introducido ya existe']);
 
-        $this->assertDatabaseCount('users');
+        $this->assertEquals(1, User::count());
     }
 
     /**
@@ -231,12 +242,10 @@ class CreateUsersTest extends TestCase
      */
     function the_twitter_field_is_optional()
     {
-        $this->withoutExceptionHandling();
-
         $this->post('/usuarios/', $this->withData([
             'twitter' => null,
-        ]))->assertRedirect(route('users.index'));
-        //->assertRedirect('usuarios'); EL MATEIX QUE LA LINEA ANTERIOR
+        ]))->assertRedirect('usuarios');
+        //->assertRedirect(route('users.index')); EL MATEIX QUE LA LINEA ANTERIOR
 
         $this->assertCredentials([
             'name' => 'Albert',
@@ -256,8 +265,6 @@ class CreateUsersTest extends TestCase
      */
     function the_role_field_is_optional()
     {
-        $this->withoutExceptionHandling();
-
         $this->post('/usuarios/', $this->withData([
             'role' => null,
         ]))->assertRedirect(route('users.index'));
@@ -307,6 +314,8 @@ class CreateUsersTest extends TestCase
      */
     function the_password_is_required()
     {
+        $this->handleValidationExceptions();
+
         $this->post('/usuarios', $this->withData([
                 'password' => '',
             ]))
@@ -320,6 +329,8 @@ class CreateUsersTest extends TestCase
      */
     function the_profession_must_be_valid()
     {
+        $this->handleValidationExceptions();
+
         $this->post('/usuarios', $this->withData([
                 'profession_id' => '999',
             ]))

@@ -12,19 +12,19 @@ trait TestHelpers
         ));
     }
 
-    protected function assertDatabaseCount($table, $connection = null)
-    {
-        $total = $this->getConnection($connection)->table($table)->count();
-        $this->assertSame(1, $total, sprintf(
-            "Failed asserting the count is equal to 1 in the table [%s]. %s %s found.", $table, $total, str_plural('row', $total)
-        ));
-    }
+//    protected function assertDatabaseCount($table, $connection = null)
+//    {
+//        $total = $this->getConnection($connection)->table($table)->count();
+//        $this->assertSame(1, $total, sprintf(
+//            "Failed asserting the count is equal to 1 in the table [%s]. %s %s found.", $table, $total, str_plural('row', $total)
+//        ));
+//    }
 
 
     protected function withData(array $custom =[]): array
     {
 
-        return array_merge($this->defaultData, $custom);
+        return array_merge($this->defaultData(), $custom);
     }
 
     protected function defaultData()

@@ -14,6 +14,7 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
 
-        $this->withExceptionHandling();
+//        $this->withExceptionHandling();
+        $this->withoutExceptionHandling();
     }
 }
