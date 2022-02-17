@@ -16,7 +16,7 @@ class CreateProfessionsTable extends Migration
         Schema::create('professions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title', 100)->unique();
-            $table->boolean('selectable')->default(true);
+//            $table->boolean('selectable')->default(true);
             $table->timestamps();
             $table->softDeletes(); //deleted_at
         });

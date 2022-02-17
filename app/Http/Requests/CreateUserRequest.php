@@ -38,12 +38,10 @@ class CreateUserRequest extends FormRequest
             'twitter' => ['nullable', 'present', 'url'],
             'profession_id' => [
                 'nullable', 'present',
-                Rule::exists('professions', 'id')->where('selectable', true),
-                'required_without:other_profession'
+                Rule::exists('professions', 'id')->where('selectable', true)
                 ],
 //                Rule::exists('professions', 'id')->whereNull('deleted_at')  //Per a la proba only_not_deleted_professions_can_be_selected()
 //            ->where('selectable', true),
-            'other_profession' => 'required_without:profession_id',
             'skills' => [
                 'array',
                 Rule::exists('skills', 'id'),
@@ -60,26 +58,27 @@ class CreateUserRequest extends FormRequest
             'email.unique' => 'El correo introducido ya existe',
             'password.required' => 'Especifica una contraseña',
             'password.min' => 'La contraseña debe contener almenos 6 caracteres',
-            'profession_id.required_without' => 'Selecciona una professión o introduce una manualmente',
-            'other_profession.required_without' => 'Sino has encontrado la tuya puedes escribir-la aqui',
+//            'profession_id.required_without' => 'Selecciona una professión o introduce una manualmente',
+//            'other_profession.required_without' => 'Sino has encontrado la tuya puedes escribir-la aqui',
         ];
     }
 
     public function createUser()
     {
+
         DB::transaction(function () {
 
             $data = $this->validated();
 
 
             //Si no arriba la variable profession_id es perque arriba other_profession, llavors, creem la nova professio per a poder insertar-la
-            if(is_null($data['profession_id'])){
-                $profession_id = Profession::create([
-                    'title'=> $data['other_profession'],
-                ])->id;
-            }else{
+//            if(is_null($data['profession_id'])){
+//                $profession_id = Profession::create([
+//                    'title'=> $data['other_profession'],
+//                ])->id;
+//            }else{
                 $profession_id = $data['profession_id'];
-            }
+//            }
 
 
 

@@ -102,7 +102,7 @@ class UserController extends Controller
     {
         $request->createUser();
 
-        return redirect('usuarios');
+        return redirect()->route('users.index');
         //return redirect()->route('users.index'); EL MATEIX QUE LA LINEA ANTERIOR
     }
 
