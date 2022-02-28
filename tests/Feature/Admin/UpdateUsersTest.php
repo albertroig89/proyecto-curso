@@ -44,8 +44,6 @@ class UpdateUsersTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $this->withoutExceptionHandling();
-
         $this->put("/usuarios/{$user->id}", [
             'name' => 'Albert',
             'email' => 'albertroiglg@gmail.com',

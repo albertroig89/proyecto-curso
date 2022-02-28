@@ -53,7 +53,7 @@ class CreateUsersTest extends TestCase
         $this->post('/usuarios/', $this->withData([
             'skills' => [$skillA->id, $skillB->id],
             'profession_id' => $profession->id,
-        ]));
+        ]))->assertRedirect('usuarios');
         //->assertRedirect('usuarios'); EL MATEIX QUE LA LINEA ANTERIOR
 
         $this->assertCredentials([
@@ -64,6 +64,7 @@ class CreateUsersTest extends TestCase
         ]);
 
         $user = User::findByEmail('albertroiglg@gmail.com');
+
         $this->assertDatabaseHas('user_profiles', [
             'bio' => 'Programador de Laravel y Vue.js',
             'twitter' => 'https://twitter.com/bertito',
@@ -258,17 +259,19 @@ class CreateUsersTest extends TestCase
         ]))
             ->assertSessionHasErrors(['email' => 'Introduce un correo electronico correcto']);
 
-        $this->assertEquals(0, User::count());
+        $this->assertDatabaseEmpty('users'); //JO NO TENIA ESTE
+
+//        $this->assertEquals(0, User::count()); ESTE ELL NO EL TE
     }
 
     /** @test */
     function the_email_must_be_unique()
     {
-        factory(USer::class)->create([
+        $this->handleValidationExceptions();
+
+        factory(User::class)->create([
             'email' => 'albertroiglg@gmail.com'
         ]);
-
-        $this->handleValidationExceptions();
 
         $this->post('/usuarios', $this->withData([
             'email' => 'albertroiglg@gmail.com'

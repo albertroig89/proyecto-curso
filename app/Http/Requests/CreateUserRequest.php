@@ -38,7 +38,7 @@ class CreateUserRequest extends FormRequest
             'twitter' => ['nullable', 'present', 'url'],
             'profession_id' => [
                 'nullable', 'present',
-                Rule::exists('professions', 'id')->where('selectable', true)
+                Rule::exists('professions', 'id')->whereNull('deleted_at')
                 ],
 //                Rule::exists('professions', 'id')->whereNull('deleted_at')  //Per a la proba only_not_deleted_professions_can_be_selected()
 //            ->where('selectable', true),
