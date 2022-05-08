@@ -6,9 +6,6 @@ use App\Http\Requests\CreateUserRequest;
 use App\Profession;
 use App\Skill;
 use App\User;
-use App\UserProfile;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -82,14 +79,20 @@ class UserController extends Controller
         $skills = Skill::orderBy('name', 'ASC')->get();
         $roles = trans('users.roles');
 
-        return view('users.create', compact('title', 'professions', 'skills', 'roles'));
+        $user = new User;
+
+        return view('users.create', compact('title', 'professions', 'skills', 'roles', 'user'));
     }
 
     public function edit(User $user)
     {
         $title = 'Edicion de usuarios';
+
+        $professions = Profession::orderBy('title', 'ASC')->get();
+        $skills = Skill::orderBy('name', 'ASC')->get();
+        $roles = trans('users.roles');
         
-        return view('users.edit', ['user' => $user], compact('title'));
+        return view('users.edit', compact('title', 'professions', 'skills', 'roles', 'user'));
     }
     public function menu()
     {

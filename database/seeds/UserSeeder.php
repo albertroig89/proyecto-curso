@@ -66,7 +66,7 @@ class UserSeeder extends Seeder
         ]);
 
         $user->profile()->create([
-            'bio' => 'Programador, tontet que aguanta al jefes, cansat estic',
+            'bio' => 'Programador, tontet que aguanta als jefes, cansat estic',
             'profession_id' => $professionId,
         ]);
         
