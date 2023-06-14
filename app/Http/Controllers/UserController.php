@@ -108,22 +108,21 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email,'.$user->id,
  //           'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)], //FA EL MATEIX QUE LA LINEA ANTERIOR PERO A MI ME FALLA FINAL TEMA 36
             'password' => '',
+            'role' => '',
+            'bio' => '',
+            'profession_id' => '',
+            'twitter' => '',
+            'skills' => '',
 
 
-
-            'role' => ['nullable', Rule::in(Role::getList())],
-            'bio' => 'required',
-            'twitter' => ['nullable', 'present', 'url'],
-            'profession_id' => [
-                'nullable', 'present',
-                Rule::exists('professions', 'id')->whereNull('deleted_at')
-             ],
-            'skills' => [
-                'array',
-                Rule::exists('skills', 'id'),
-            ],
-
-
+//            'profession_id' => [
+//                'nullable', 'present',
+//                Rule::exists('professions', 'id')->whereNull('deleted_at')
+//             ],
+//            'skills' => [
+//                'array',
+//                Rule::exists('skills', 'id'),
+//            ],
 
         ], [
             'name.required' => 'El campo nombre es obligatorio',
@@ -132,9 +131,9 @@ class UserController extends Controller
             'email.unique' => 'El correo introducido ya existe',
         ]);
 
-        if (! empty ($data['skills'])) {
-            $user->skills()->attach($data['skills']);
-        }
+//        if (! empty ($data['skills'])) {
+//            $user->skills()->attach($data['skills']);
+//        }
 
         if ($data['password'] != null) {
             $data['password'] = bcrypt($data['password']);
@@ -142,17 +141,16 @@ class UserController extends Controller
             unset($data['password']);
         }
 
-        $profession_id = $data['profession_id'];
+//        $profession_id = $data['profession_id'];
 
-        $user->role = $data['role'] ?? 'user';
+        $user->fill($data);
+        $user->role = $data['role'];
+        $user->save();
 
-        $user->update($data);
 
-        $user->profile()->update([
-            'bio' => $data['bio'],
-            'twitter' => $data['twitter'],
-            'profession_id' => $profession_id,
-        ]);
+        $user->profile->update($data);
+
+        $user->skills()->sync($data['skills'] ?? []);
 
 //        return redirect("usuarios/{$user->id}"); FA EL MATEIX QUE LA LINEA ANTERIOR
         return redirect()->route('users.show', ['user' => $user]);
