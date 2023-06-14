@@ -6,24 +6,9 @@
     </div>
 
     <div class="form-group">
-        @if ($errors->has('email'))
-            <label for="email">Correo electronico:</label>
-            <input type="email" name="email" class="form-control is-invalid" id="email" aria-describedby="emailHelp" placeholder="bertito@example.es" value="{{ old('email', $user->email) }}">
-            <div class="invalid-feedback">
-                {{ $errors->first('email') }}
-            </div>
-        @elseif ($errors->any())
-            <label for="email">Correo electronico:</label>
-            <input type="email" name="email" class="form-control is-valid" id="email" aria-describedby="emailHelp" placeholder="bertito@example.es" value="{{ old('email', $user->email) }}">
-            <div class="valid-feedback">
-                Correcto!
-            </div>
-        @else
-            <label for="email">Correo electronico:</label>
-            <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="bertito@example.es" value="{{ old('email', $user->email) }}">
-            <small id="emailHelp" class="form-text text-muted">Escribe un email que puedas verificar.</small>
-        @endif
+        @include('shared._emailerror')
     </div>
+
     <div class="form-group">
         <label for="bio">Bio:</label>
         <textarea name="bio" class="form-control" id="bio">{{ old('bio', $user->profile->bio) }}</textarea>
@@ -31,57 +16,12 @@
 
     <div class="form-group">
         <label for="profession_id">Profesión</label>
-        @if ($errors->has('profession_id'))
-            <select name="profession_id" id="profession_id" class="form-control is-invalid">
-                <option value="">Selecciona una professión</option>
-                @foreach($professions as $profession)
-                    <option value="{{ $profession->id }}"{{ old('profession_id', $user->profile->profession_id) == $profession->id ? ' selected' : ''}}>
-                        {{ $profession->title }}
-                    </option>
-                @endforeach
-            </select>
-            <div class="invalid-feedback">
-                {{ $errors->first('profession_id') }}
-            </div>
-        @elseif ($errors->any())
-            <select name="profession_id" id="profession_id" class="form-control is-valid">
-                <option value="">Selecciona una professión</option>
-                @foreach($professions as $profession)
-                    <option value="{{ $profession->id }}"{{ old('profession_id', $user->profile->profession_id) == $profession->id ? ' selected' : ''}}>
-                        {{ $profession->title }}
-                    </option>
-                @endforeach
-            </select>
-            <div class="valid-feedback">
-                Correcto!
-            </div>
-        @else
-            <select name="profession_id" id="profession_id" class="form-control">
-                <option value="">Selecciona una professión</option>
-                @foreach($professions as $profession)
-                    <option value="{{ $profession->id }}"{{ old('profession_id', $user->profile->profession_id) == $profession->id ? ' selected' : ''}}>
-                        {{ $profession->title }}
-                    </option>
-                @endforeach
-            </select>
-        @endif
+        @include('shared._professionerror')
     </div>
 
     <div class="form-group">
         <label for="other_profession">Otra profesión: </label>
-        @if ($errors->has('other_profession'))
-            <input type="text" class="form-control is-invalid" name="other_profession" id="other_profession" placeholder="Rellena esto sino esta tu profesión" value="{{old('other_profession', $user->profile->other_profession)}}">
-            <div class="invalid-feedback">
-                {{ $errors->first('other_profession') }}
-            </div>
-        @elseif ($errors->any())
-            <input type="text" class="form-control is-valid" name="other_profession" id="other_profession" placeholder="Rellena esto sino esta tu profesión" value="{{old('other_profession', $user->profile->other_profession)}}">
-            <div class="valid-feedback">
-                Correcto!
-            </div>
-        @else
-            <input type="text" class="form-control" name="other_profession" id="other_profession" placeholder="Rellena esto sino esta tu profesión" value="{{old('other_profession', $user->profile->other_profession)}}">
-        @endif
+        @include('shared._otherprofessionerror')
     </div>
 
     <div class="form-group">
