@@ -47,8 +47,6 @@ class UpdateUserRequest extends FormRequest
             unset($data['password']);
         }
 
-//        $profession_id = $data['profession_id'];
-
         $user->fill($data);
         $user->role = $data['role'];
         $user->save();

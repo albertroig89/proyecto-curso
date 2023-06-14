@@ -32,7 +32,13 @@ class CreateUsersTest extends TestCase
 
         $this->get('/usuarios/nuevo')
             ->assertStatus(200)
-            ->assertSee('Creacion de usuarios');
+            ->assertSee('Creacion de usuarios')
+            ->assertViewHas('professions', function ($professions) use ($profession) {
+                return $professions->contains($profession);
+            })
+            ->assertViewHas('skills', function ($skills) use ($skillA, $skillB) {
+                return $skills->contains($skillA) && $skills->contains($skillB);
+            });
     }
 
     /** @test */
@@ -92,7 +98,6 @@ class CreateUsersTest extends TestCase
 //            'profession_id' => null,
 //            'other_profession' => 'new profession'
 //        ]));
-//        //->assertRedirect('usuarios'); EL MATEIX QUE LA LINEA ANTERIOR
 //
 //        //Obtenim la nova professió (other_profession) que s'incerta al no posar el (profession_id)
 //        $other_profession = Profession::where('title', 'new profession')->orderBy('id', 'DESC')->get()->last()->id;

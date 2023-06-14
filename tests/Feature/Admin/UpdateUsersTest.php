@@ -23,9 +23,7 @@ class UpdateUsersTest extends TestCase
         'role' => 'user',
     ];
 
-    /**
-     * @test
-     */
+    /** @test */
     function it_loads_the_edit_user_page()
     {
         $user = factory(User::class)->create();
@@ -39,9 +37,7 @@ class UpdateUsersTest extends TestCase
             });
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     function it_updates_a_user()
     {
         $user = factory(User::class)->create();
@@ -97,9 +93,7 @@ class UpdateUsersTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     function it_detaches_all_the_skills_if_none_is_checked()
     {
         $user = factory(User::class)->create();
@@ -114,9 +108,7 @@ class UpdateUsersTest extends TestCase
         $this->assertDatabaseEmpty('user_skill');
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     function the_name_is_required()
     {
         $this->handleValidationExceptions();
@@ -133,9 +125,24 @@ class UpdateUsersTest extends TestCase
         $this->assertDatabaseMissing('users', ['email' => 'albertroiglg@gmail.com']);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
+    function the_email_is_required()
+    {
+        $this->handleValidationExceptions();
+
+        $user = factory(User::class)->create();
+
+        $this->from("usuarios/{$user->id}/editar")
+            ->put("usuarios/{$user->id}", $this->withData([
+                'email' => '',
+            ]))
+            ->assertRedirect("usuarios/{$user->id}/editar")
+            ->assertSessionHasErrors(['email']);
+
+        $this->assertDatabaseMissing('users', ['name' => 'Albert Roig']);
+    }
+
+    /** @test */
     function the_email_must_be_valid()
     {
         $this->handleValidationExceptions();
@@ -152,9 +159,7 @@ class UpdateUsersTest extends TestCase
         $this->assertDatabaseMissing('users', ['name' => 'Albert Roig']);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     function the_email_must_be_unique()
     {
         $this->handleValidationExceptions();
@@ -175,9 +180,7 @@ class UpdateUsersTest extends TestCase
             ->assertSessionHasErrors(['email']);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     function the_users_email_can_stay_the_same()
     {
 
@@ -198,9 +201,7 @@ class UpdateUsersTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     function the_password_is_optional()
     {
         $oldPassword = 'clave_anterior';
@@ -222,9 +223,7 @@ class UpdateUsersTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     function the_role_is_required()
     {
         $this->handleValidationExceptions();
@@ -239,6 +238,50 @@ class UpdateUsersTest extends TestCase
             ->assertSessionHasErrors(['role']);
 
         $this->assertDatabaseMissing('users', ['email' => 'albertroiglg@gmail.com']);
+    }
+
+    /** @test */
+    function the_bio_is_required()
+    {
+        $this->handleValidationExceptions();
+
+        $user = factory(User::class)->create();
+
+        $this->from("usuarios/{$user->id}/editar")
+            ->put("usuarios/{$user->id}", $this->withData([
+                'bio' => '',
+            ]))
+            ->assertRedirect("usuarios/{$user->id}/editar")
+            ->assertSessionHasErrors(['bio']);
+
+        $this->assertDatabaseMissing('users', ['email' => 'albertroiglg@gmail.com']);
+    }
+
+    /** @test */
+    function the_twitter_field_is_optional()
+    {
+        $this->handleValidationExceptions();
+
+        $user = factory(User::class)->create();
+
+        $this->from("usuarios/{$user->id}/editar")
+            ->put("usuarios/{$user->id}", $this->withData([
+                'twitter' => null,
+            ]))
+        ->assertRedirect("usuarios/{$user->id}");
+
+        $this->assertCredentials([
+            'name' => 'Albert Roig',
+            'email' => 'albertroiglg@gmail.com',
+            'password' => '123456',
+        ]);
+
+        $this->assertDatabaseHas('user_profiles', [
+            'bio' => 'Programador de Laravel y Vue.js',
+            'twitter' => null,
+            'user_id' => User::findByEmail('albertroiglg@gmail.com')->id,
+
+        ]);
     }
 
 }
