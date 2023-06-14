@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Forms\UserForm;
 use App\Http\Requests\CreateUserRequest;
 use App\Profession;
 use App\Role;
@@ -75,15 +76,14 @@ class UserController extends Controller
     
     public function create()
     {
-        $user = new User;
-
-        return view('users.create', compact( 'user'));
+        return new UserForm('users.create', new User);
     }
 
     public function edit(User $user)
     {
-        return view('users.edit', compact( 'user'));
+        return new UserForm('users.edit', $user);
     }
+
     public function menu()
     {
         $title = 'Menu';

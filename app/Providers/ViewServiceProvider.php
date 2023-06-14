@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use App\Http\ViewComposers\UserFieldsComposer;
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class ViewServiceProvider extends ServiceProvider
