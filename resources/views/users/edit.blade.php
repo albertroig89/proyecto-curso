@@ -9,7 +9,8 @@
 
         <form method="POST" action="{{ url("usuarios/{$user->id}") }}">
             {{ method_field('PUT') }}
-            @include('users._fields')
+
+            @render('UserFields', compact('user'))
 
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Editar usuario</button>
