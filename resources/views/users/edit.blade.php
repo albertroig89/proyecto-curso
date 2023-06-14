@@ -17,7 +17,7 @@
             </div>
         </form>
 
-        @include('shared._errors');
+        @include('shared._errors')
 
     @endcard
 

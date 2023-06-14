@@ -20,24 +20,27 @@
       <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 
+      <!-- Favicons -->
+      <link  rel="icon"   href="{{ asset('/images/favicon.png') }}" type="image/png" />
+
     <meta name="theme-color" content="#7952b3">
 
 
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
+{{--    <style>--}}
+{{--      .bd-placeholder-img {--}}
+{{--        font-size: 1.125rem;--}}
+{{--        text-anchor: middle;--}}
+{{--        -webkit-user-select: none;--}}
+{{--        -moz-user-select: none;--}}
+{{--        user-select: none;--}}
+{{--      }--}}
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
+{{--      @media (min-width: 768px) {--}}
+{{--        .bd-placeholder-img-lg {--}}
+{{--          font-size: 3.5rem;--}}
+{{--        }--}}
+{{--      }--}}
+{{--    </style>--}}
 
     
     <!-- Custom styles for this template -->
@@ -47,7 +50,7 @@
     
 <header>
   <!-- Fixed navbar -->
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Curso de laravel 5.5</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,11 +92,10 @@
 <!-- Begin page content -->
 <main class="flex-shrink-0">
 
-    <div class="row ml-3 mt-5">
-        <div class="mt-3 col-10">
-           @yield('content')
-        </div>
+    <div class="pt-5 mt-2 col-12">
+        @yield('content')
     </div>
+
 </main>
 
 <footer class="footer mt-auto py-3 bg-light">

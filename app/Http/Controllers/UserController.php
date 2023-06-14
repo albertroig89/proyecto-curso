@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUserRequest;
 use App\Profession;
+use App\Role;
 use App\Skill;
 use App\User;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -73,22 +75,14 @@ class UserController extends Controller
     
     public function create()
     {
-        $professions = Profession::orderBy('title', 'ASC')->get();
-        $skills = Skill::orderBy('name', 'ASC')->get();
-        $roles = trans('users.roles');
-
         $user = new User;
 
-        return view('users.create', compact( 'professions', 'skills', 'roles', 'user'));
+        return view('users.create', compact( 'user'));
     }
 
     public function edit(User $user)
     {
-        $professions = Profession::orderBy('title', 'ASC')->get();
-        $skills = Skill::orderBy('name', 'ASC')->get();
-        $roles = trans('users.roles');
-        
-        return view('users.edit', compact( 'professions', 'skills', 'roles', 'user'));
+        return view('users.edit', compact( 'user'));
     }
     public function menu()
     {
@@ -107,11 +101,30 @@ class UserController extends Controller
 
     public function update(User $user)
     {
+
+
         $data = request()->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email,'.$user->id,
  //           'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)], //FA EL MATEIX QUE LA LINEA ANTERIOR PERO A MI ME FALLA FINAL TEMA 36
-            'password' => ''
+            'password' => '',
+
+
+
+            'role' => ['nullable', Rule::in(Role::getList())],
+            'bio' => 'required',
+            'twitter' => ['nullable', 'present', 'url'],
+            'profession_id' => [
+                'nullable', 'present',
+                Rule::exists('professions', 'id')->whereNull('deleted_at')
+             ],
+            'skills' => [
+                'array',
+                Rule::exists('skills', 'id'),
+            ],
+
+
+
         ], [
             'name.required' => 'El campo nombre es obligatorio',
             'email.required' => 'Introduce un correo electronico',
@@ -119,12 +132,27 @@ class UserController extends Controller
             'email.unique' => 'El correo introducido ya existe',
         ]);
 
+        if (! empty ($data['skills'])) {
+            $user->skills()->attach($data['skills']);
+        }
+
         if ($data['password'] != null) {
             $data['password'] = bcrypt($data['password']);
         }else{
             unset($data['password']);
         }
+
+        $profession_id = $data['profession_id'];
+
+        $user->role = $data['role'] ?? 'user';
+
         $user->update($data);
+
+        $user->profile()->update([
+            'bio' => $data['bio'],
+            'twitter' => $data['twitter'],
+            'profession_id' => $profession_id,
+        ]);
 
 //        return redirect("usuarios/{$user->id}"); FA EL MATEIX QUE LA LINEA ANTERIOR
         return redirect()->route('users.show', ['user' => $user]);
