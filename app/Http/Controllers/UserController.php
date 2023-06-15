@@ -6,10 +6,7 @@ use App\Http\Forms\UserForm;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Profession;
-use App\Role;
-use App\Skill;
 use App\User;
-use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -25,10 +22,10 @@ class UserController extends Controller
     }
     
     public function show(User $user) {
-        
+        $professions = Profession::orderBy('title', 'ASC')->get();
         $title = 'Detalles de Usuarios';
 
-        return view('users.show', compact('title', 'user'));
+        return view('users.show', compact('title', 'user', 'professions'));
     }
     
     public function create()
