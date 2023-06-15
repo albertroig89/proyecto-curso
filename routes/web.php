@@ -11,6 +11,8 @@
 |
 */
 
+//Users
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -46,3 +48,10 @@ Route::get('/saludo/{name}/{nickname}', 'WelcomeUserController@index2');
 
 Route::delete('/usuarios/{user}', 'UserController@destroy')
         ->name('users.destroy');
+
+
+// Profile
+
+Route::get('/editar-perfil/', 'ProfileController@edit');
+
+Route::put('/editar-perfil/', 'ProfileController@update');

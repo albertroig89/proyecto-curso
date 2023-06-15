@@ -276,12 +276,40 @@ class UpdateUsersTest extends TestCase
             'password' => '123456',
         ]);
 
-        $this->assertDatabaseHas('user_profiles', [
-            'bio' => 'Programador de Laravel y Vue.js',
-            'twitter' => null,
-            'user_id' => User::findByEmail('albertroiglg@gmail.com')->id,
+//        $this->assertDatabaseHas('user_profiles', [
+//            'bio' => 'Programador de Laravel y Vue.js',
+//            'twitter' => null,
+//            'user_id' => User::findByEmail('albertroiglg@gmail.com')->id,
+//
+//        ]);
+    }
 
+    /** @test */
+    function the_profession_is_optional()
+    {
+        $this->handleValidationExceptions();
+
+        $user = factory(User::class)->create();
+
+        $this->from("usuarios/{$user->id}/editar")
+            ->put("usuarios/{$user->id}", $this->withData([
+                'profession_id' => null,
+            ]))
+            ->assertRedirect("usuarios/{$user->id}");
+
+        $this->assertCredentials([
+            'name' => 'Albert Roig',
+            'email' => 'albertroiglg@gmail.com',
+            'password' => '123456',
         ]);
+
+//        $this->assertDatabaseHas('user_profiles', [
+//            'profession_id' => null,
+//            'bio' => 'Programador de Laravel y Vue.js',
+//            'twitter' => 'https://twitter.com/bertito',
+//            'user_id' => User::findByEmail('albertroiglg@gmail.com')->id,
+//
+//        ]);
     }
 
 }

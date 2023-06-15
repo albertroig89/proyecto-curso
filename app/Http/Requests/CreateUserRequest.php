@@ -31,7 +31,6 @@ class CreateUserRequest extends FormRequest
         return [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
-//            'email' => ['required', 'email', 'unique':users,email], FA EL MATEIX QUE LA LINEA ANTERIOR
             'password' => 'required|min:6',
             'role' => ['nullable', Rule::in(Role::getList())],
             'bio' => 'required',
@@ -40,8 +39,6 @@ class CreateUserRequest extends FormRequest
                 'nullable', 'present',
                 Rule::exists('professions', 'id')->whereNull('deleted_at')
                 ],
-//                Rule::exists('professions', 'id')->whereNull('deleted_at')  //Per a la proba only_not_deleted_professions_can_be_selected()
-//            ->where('selectable', true),
             'skills' => [
                 'array',
                 Rule::exists('skills', 'id'),
@@ -58,8 +55,6 @@ class CreateUserRequest extends FormRequest
             'email.unique' => 'El correo introducido ya existe',
             'password.required' => 'Especifica una contraseña',
             'password.min' => 'La contraseña debe contener almenos 6 caracteres',
-//            'profession_id.required_without' => 'Selecciona una professión o introduce una manualmente',
-//            'other_profession.required_without' => 'Sino has encontrado la tuya puedes escribir-la aqui',
         ];
     }
 
@@ -68,42 +63,24 @@ class CreateUserRequest extends FormRequest
 
         DB::transaction(function () {
 
-            $data = $this->validated();
-
-
-            //Si no arriba la variable profession_id es perque arriba other_profession, llavors, creem la nova professio per a poder insertar-la
-//            if(is_null($data['profession_id'])){
-//                $profession_id = Profession::create([
-//                    'title'=> $data['other_profession'],
-//                ])->id;
-//            }else{
-                $profession_id = $data['profession_id'];
-//            }
-
-
-
-            $user = new User([
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'password' => bcrypt($data['password']),
+            $user = User::create([
+                'name' => $this->name,
+                'email' => $this->email,
+                'password' => bcrypt($this->password),
+                'role' => $this->role ?? 'user',
                 ]);
-
-            $user->role = $data['role'] ?? 'user';
 
             $user->save();
 
             $user->profile()->create([
-                'bio' => $data['bio'],
-                'twitter' => $data['twitter'],
-                'profession_id' => $profession_id,
-//                'twitter' => array_get($data,'twitter'),  FA EL MATEIX QUE LINIA ANTERIOR PERO EN HELPER DE LARAVEL
-//                'twitter' => $this->twitter,  FA EL MATEIX QUE LES DOS ANTERIORS
+                'bio' => $this->bio,
+                'twitter' => $this->twitter,
+                'profession_id' => $this->profession_id,
             ]);
 
-            if (! empty ($data['skills'])) {
-                $user->skills()->attach($data['skills']);
+            if ($this->skills != null) {
+                $user->skills()->attach($this->skills);
             }
-//            $user->skills()->attach($data['skills'] ?? []); FA EL MATEIX QUE LES LINIES ANTERIORS
         });
     }
 }
