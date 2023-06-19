@@ -19,10 +19,10 @@
         @include('shared._professionerror')
     </div>
 
-    <div class="form-group">
-        <label for="other_profession">Otra profesión: </label>
-        @include('shared._otherprofessionerror')
-    </div>
+{{--    <div class="form-group">--}}
+{{--        <label for="other_profession">Otra profesión: </label>--}}
+{{--        @include('shared._otherprofessionerror')--}}
+{{--    </div>--}}
 
     <div class="form-group">
         <label for="twitter">Twitter:</label>

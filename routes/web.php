@@ -52,14 +52,17 @@ Route::delete('/usuarios/{user}', 'UserController@destroy')
 
 // Profile
 
-Route::get('/editar-perfil/', 'ProfileController@edit');
+Route::get('/editar-perfil/', 'ProfileController@edit')
+    ->name('profiles.edit');
 
 Route::put('/editar-perfil/', 'ProfileController@update');
 
 // Professions
-Route::get('/profesiones/', 'ProfessionController@index');
-
+Route::get('/profesiones/', 'ProfessionController@index')
+    ->name('professions.index');
 Route::delete('/profesiones/{profession}', 'ProfessionController@destroy');
 
 // Skills
-Route::get('/habilidades/', 'SkillController@index');
+Route::get('/habilidades/', 'SkillController@index')
+    ->name('skills.index');
+Route::delete('/habilidades/{skill}', 'SkillController@destroy');

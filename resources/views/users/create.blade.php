@@ -8,8 +8,7 @@
         @slot('header', 'Creación de usuarios')
 
         <form method="POST" action="{{ url('usuarios') }}">
-            @render('UserFields', ['user' => $user])
-
+{{--            @render('UserFields', ['user' => $user])--}}
 
             {{ new \App\Http\ViewComponents\UserFields($user) }}
 
@@ -22,16 +21,4 @@
 
     @include('shared._errors')
 
-@endsection
-
-@section('jquery')
-    @parent
-    console.log('Template: create.blade.php');
-    $('#profession_id').on('change', function() {
-        if( this.value != "" ){
-            $('#other_profession').parent().hide();
-        }else{
-            $('#other_profession').parent().show();
-        }
-    });
 @endsection

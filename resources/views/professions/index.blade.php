@@ -29,6 +29,10 @@
                             @method('DELETE')
                             <button type="submit" class="btn btn-link"><span class="oi oi-trash"></span></button>
                         </form>
+                    @else
+                        <form action="{{ url("profesiones/{$profession->id}") }}" method="POST">
+                            <button type="submit" class="btn btn-link disabled"><span class="oi oi-trash"></span></button>
+                        </form>
                     @endif
                 </td>
             </tr>

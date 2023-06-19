@@ -86,63 +86,6 @@ class CreateUsersTest extends TestCase
         ]);
     }
 
-
-
-
-//    /** @test */
-//    function the_profession_id_is_absent_but_another_profession_is_passed()
-//    {
-//        $this->withoutExceptionHandling();
-//
-//        $this->post('/usuarios/', $this->withData([
-//            'profession_id' => null,
-//            'other_profession' => 'new profession'
-//        ]));
-//
-//        //Obtenim la nova professió (other_profession) que s'incerta al no posar el (profession_id)
-//        $other_profession = Profession::where('title', 'new profession')->orderBy('id', 'DESC')->get()->last()->id;
-//
-//        $this->assertCredentials([
-//            'name' => 'Albert',
-//            'email' => 'albertroiglg@gmail.com',
-//            'password' => '123456',
-//        ]);
-//
-//        $this->assertDatabaseHas('user_profiles', [
-//            'bio' => 'Programador de Laravel y Vue.js',
-//            'user_id' => User::findByEmail('albertroiglg@gmail.com')->id,
-//            'profession_id' => $other_profession,
-//        ]);
-//    }
-//
-//    /** @test */
-//    /**ESTA*/
-//    function the_other_profession_is_absent_but_profession_id_is_passed()
-//    {
-////        $this->handleValidationExceptions();
-//
-//        $profession = factory(Profession::class)->create();
-//
-//        $this->post('/usuarios/', $this->withData([
-//            'other_profession' => null
-//        ]));
-//
-//        $this->assertCredentials([
-//            'name' => 'Albert',
-//            'email' => 'albertroiglg@gmail.com',
-//            'password' => '123456',
-//        ]);
-//
-//        $this->assertDatabaseHas('user_profiles', [
-//            'bio' => 'Programador de Laravel y Vue.js',
-//            'user_id' => User::findByEmail('albertroiglg@gmail.com')->id,
-//            'profession_id' => $profession->id,
-//        ]);
-//    }
-
-
-
-
     /** @test */
     function the_twitter_field_is_optional()
     {
@@ -374,8 +317,3 @@ class CreateUsersTest extends TestCase
     }
 
 }
-
-
-
-
-
