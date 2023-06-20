@@ -25,9 +25,9 @@ class UserController extends Controller
     {
         $users = User::onlyTrashed()->get();
 
-        $title = 'Listado de usuarios en papelera';
+        $title = 'Usuarios en papelera';
 
-        return view('users.index', compact('title', 'users'));
+        return view('users.trashed', compact('title', 'users'));
 
     }
     

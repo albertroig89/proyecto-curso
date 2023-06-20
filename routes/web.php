@@ -66,9 +66,25 @@ Route::put('/editar-perfil/', 'ProfileController@update');
 // Professions
 Route::get('/profesiones/', 'ProfessionController@index')
     ->name('professions.index');
-Route::delete('/profesiones/{profession}', 'ProfessionController@destroy');
+
+Route::get('/profesiones/papelera', 'ProfessionController@trashed')
+    ->name('professions.trashed');
+
+Route::patch('/profesiones/{profession}/papelera', 'ProfessionController@trash')
+    ->name('professions.trash');
+
+Route::delete('/profesiones/{id}', 'ProfessionController@destroy')
+    ->name('professions.destroy');
 
 // Skills
 Route::get('/habilidades/', 'SkillController@index')
     ->name('skills.index');
-Route::delete('/habilidades/{skill}', 'SkillController@destroy');
+
+Route::get('/habilidades/papelera', 'SkillController@trashed')
+    ->name('skills.trashed');
+
+Route::patch('/habilidades/{skill}/papelera', 'SkillController@trash')
+    ->name('skills.trash');
+
+Route::delete('/habilidades/{skill}', 'SkillController@destroy')
+    ->name('skills.destroy');

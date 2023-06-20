@@ -3,7 +3,7 @@
 @section('title', 'Habilidades')
 
 @section('content')
-    <div class="d-flex justify-content-between align-items-end mb-3">
+    <div class="d-flex justify-content-between align-items-end mt-2">
         <h1 class="pb-1">Listado de habilidades</h1>
     </div>
 
@@ -24,9 +24,9 @@
                 <td>{{ $skill->skills_count }}</td>
                 <td>
                     @if ($skill->skills_count == 0)
-                        <form action="{{ url("habilidades/{$skill->id}") }}" method="POST">
+                        <form action="{{ route('skills.trash', $skill) }}" method="POST">
                             @csrf
-                            @method('DELETE')
+                            @method('PATCH')
                             <button type="submit" class="btn btn-link"><span class="oi oi-trash"></span></button>
                         </form>
                     @else

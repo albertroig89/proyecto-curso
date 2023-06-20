@@ -13,9 +13,7 @@ class DeleteUsersTest extends TestCase
     use RefreshDatabase;
 
 
-    /**
-     * @test
-     */
+    /** @test */
     function it_sends_a_user_to_the_trash()
     {
         $user = factory(User::class)->create();
@@ -42,9 +40,7 @@ class DeleteUsersTest extends TestCase
         $this->assertTrue($user->trashed());
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     function it_completly_deletes_a_user()
     {
         $user = factory(User::class)->create([
@@ -61,9 +57,7 @@ class DeleteUsersTest extends TestCase
         $this->assertDatabaseEmpty('users');
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     function it_cannot_delete_a_user_that_is_not_in_the_trash()
     {
         $this->withExceptionHandling();

@@ -18,12 +18,29 @@ class ProfessionController extends Controller
         ]);
     }
 
-    public function destroy(Profession $profession)
+    public function trashed()
     {
-        abort_if($profession->profiles()->exists(), 400, 'Cannot delete a profession linked to a profile.');
+        $professions = Profession::onlyTrashed()->get();
 
+        $title = 'Professiones en papelera';
+
+        return view('professions.trashed', compact('title', 'professions'));
+
+    }
+
+    public function trash(Profession $profession)
+    {
         $profession->delete();
 
-        return redirect('profesiones');
+        return redirect()->route('professions.index');
+    }
+
+    public function destroy($id)
+    {
+        $profession = Profession::onlyTrashed()->where('id', $id)->firstOrFail();
+
+        $profession->forceDelete();
+
+        return redirect()->route('professions.trashed');
     }
 }

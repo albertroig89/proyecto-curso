@@ -68,6 +68,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ route('users.index') }}">Mostrar usuarios</a>
                     <a class="dropdown-item" href="{{ route('users.create') }}">Nuevo usuario</a>
+                    <a class="dropdown-item" href="{{ route('users.trashed') }}">Papelera usuarios</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -84,6 +85,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ route('professions.index') }}">Mostrar profesiones</a>
+                    <a class="dropdown-item" href="{{ route('professions.trashed') }}">Papelera profesiones</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -92,6 +94,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ route('skills.index') }}">Mostrar habilidades</a>
+                    <a class="dropdown-item" href="{{ route('skills.trashed') }}">Papelera habilidades</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
