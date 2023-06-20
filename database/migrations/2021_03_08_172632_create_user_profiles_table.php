@@ -34,6 +34,7 @@ class CreateUserProfilesTable extends Migration
                 ->onDelete('CASCADE'); //Al borrar l'usuari borrara el perfil associat a l'usuari pero sense borrar les professions que tenim introduides
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -10,9 +10,7 @@ class ListUsersTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test
-     */
+    /** @test */
     function it_shows_the_users_list()
     {
 
@@ -22,7 +20,7 @@ class ListUsersTest extends TestCase
         ]);
 
         factory(User::class)->create([
-            'name' => 'Laia Barco'
+            'name' => 'Bonica Nica'
         ]);
 
 
@@ -30,16 +28,37 @@ class ListUsersTest extends TestCase
             ->assertStatus(200)
             ->assertSee('Listado de usuarios')
             ->assertSee('Albert')
-            ->assertSee('Laia');
+            ->assertSee('Bonica');
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     function it_shows_a_default_message_if_the_users_list_is_empty()
     {
         $this->get('/usuarios')
             ->assertStatus(200)
             ->assertSee('No hay usuarios registrados.');
     }
+
+
+    /** @test */
+    function it_shows_the_deleted_users()
+    {
+
+        factory(User::class)->create([
+            'name' => 'Albert Roig',
+            'deleted_at' => now(),
+        ]);
+
+        factory(User::class)->create([
+            'name' => 'Bonica Nica'
+        ]);
+
+
+        $this->get('/usuarios/papelera')
+            ->assertStatus(200)
+            ->assertSee('Listado de usuarios en papelera')
+            ->assertSee('Albert')
+            ->assertDontSee('Bonica');
+    }
+
 }

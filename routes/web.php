@@ -34,7 +34,7 @@ Route::get('/usuarios/{user}', 'UserController@show')
 Route::get('/usuarios/nuevo', 'UserController@create')
     ->name('users.create');
 
-Route::post('/usuarios', 'UserController@store'); // PODEM POSAR 2 RUTES AL MATEIX LLOC PER DIFIRENTS METODOS "GET" I "POST"s
+Route::post('/usuarios', 'UserController@store'); // PODEM POSAR 2 RUTES AL MATEIX LLOC PER DIFIRENTS METODOS "GET" I "POST"
 
 Route::get('/usuarios/{user}/editar', 'UserController@edit')
         ->where('id', '\d+')
@@ -42,11 +42,17 @@ Route::get('/usuarios/{user}/editar', 'UserController@edit')
 
 Route::put('/usuarios/{user}', 'UserController@update');
 
-Route::get('/saludo/{name}', 'WelcomeUserController@index');  //AL POSAR EL ? DESPRES DEL CAMP EL FEM OPCIONAL
+Route::get('/saludo/{name}', 'WelcomeUserController@index');
 
 Route::get('/saludo/{name}/{nickname}', 'WelcomeUserController@index2');
 
-Route::delete('/usuarios/{user}', 'UserController@destroy')
+Route::get('/usuarios/papelera', 'UserController@trashed')
+        ->name('users.trashed');
+
+Route::patch('/usuarios/{user}/papelera', 'UserController@trash')
+        ->name('users.trash');
+
+Route::delete('/usuarios/{id}', 'UserController@destroy')
         ->name('users.destroy');
 
 
