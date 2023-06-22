@@ -52,7 +52,7 @@ class DeleteUsersTest extends TestCase
         ]);
 
         $this->delete("usuarios/{$user->id}")
-            ->assertRedirect('usuarios/papelera');
+            ->assertRedirect(route('users.trashed'));
 
         $this->assertDatabaseEmpty('users');
     }

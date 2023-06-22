@@ -43,4 +43,13 @@ class ProfessionController extends Controller
 
         return redirect()->route('professions.trashed');
     }
+
+    public function restore( $id )
+    {
+        $profession = Profession::withTrashed()->where('id', '=', $id)->first();
+
+        $profession->restore();
+
+        return redirect()->route( "professions.trashed" )->with("restored" , $id );
+    }
 }

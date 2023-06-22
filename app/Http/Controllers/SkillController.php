@@ -43,4 +43,13 @@ class SkillController extends Controller
 
         return redirect()->route('skills.trashed');
     }
+
+    public function restore( $id )
+    {
+        $skill = Skill::withTrashed()->where('id', '=', $id)->first();
+
+        $skill->restore();
+
+        return redirect()->route( "skills.trashed" )->with("restored" , $id );
+    }
 }

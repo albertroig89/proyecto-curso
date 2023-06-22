@@ -7,12 +7,13 @@
         <h1 class="pb-1">{{ $title }}</h1>
     </div>
     @if ($skills->count())
-        <table class="table">
-            <thead class="thead-dark">
+        <table class="table table-striped">
+            <thead>
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Título</th>
-                <th scope="col">Acciones</th>
+                <th scope="col">Recuperar habilidad</th>
+                <th scope="col">Eliminar habilidad definitivamente</th>
             </tr>
             </thead>
             <tbody>
@@ -20,18 +21,13 @@
                 <tr>
                     <th scope="row">{{ $skill->id }}</th>
                     <td>{{ $skill->name }}</td>
+                    <td><a href="{{ route('skills.restore', $skill) }}"><i class="oi oi-arrow-circle-left"></i></a></td>
                     <td>
-                        @if ($skill->skills_count == 0)
-                            <form action="{{ route('skills.destroy', $skill) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-link" type="submit"><span id="trash-{{ $skill->id }}" class="oi oi-circle-x"></span></button>
-                            </form>
-                        @else
-                            <form action="{{ url("habilidades/{$skill->id}") }}" method="POST">
-                                <button type="submit" class="btn btn-link disabled"><span class="oi oi-trash"></span></button>
-                            </form>
-                        @endif
+                        <form action="{{ route('skills.destroy', $skill) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-link" type="submit"><span id="trash-{{ $skill->id }}" class="oi oi-circle-x"></span></button>
+                        </form>
                     </td>
                 </tr>
             @endforeach

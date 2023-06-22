@@ -25,7 +25,11 @@
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>
-                        <button class="btn btn-link" type="submit"><span id="trash-{{ $user->id }}" class="oi oi-arrow-circle-left"></span></button>
+{{--                        <form action="{{ route('users.restore', $user) }}" method="POST">--}}
+{{--                            <button class="btn btn-link" type="submit"><span class="oi oi-arrow-circle-left-x"></span></button>--}}
+{{--                        </form>--}}
+                        <a href="{{ route('users.restore', $user) }}"><i class="oi oi-arrow-circle-left"></i></a>
+{{--                        <button class="btn btn-link" type="submit"><span id="restore-{{ $user->id }}" class="oi oi-arrow-circle-left"></span></button>--}}
                     </td>
                     <td>
                         <form action="{{ route('users.destroy', $user) }}" method="POST">

@@ -55,9 +55,10 @@ Route::patch('/usuarios/{user}/papelera', 'UserController@trash')
 Route::delete('/usuarios/{id}', 'UserController@destroy')
         ->name('users.destroy');
 
+Route::get('usuarios/{id}/restaurar', 'UserController@restore')
+    ->name('users.restore');
 
 // Profile
-
 Route::get('/editar-perfil/', 'ProfileController@edit')
     ->name('profiles.edit');
 
@@ -76,6 +77,9 @@ Route::patch('/profesiones/{profession}/papelera', 'ProfessionController@trash')
 Route::delete('/profesiones/{id}', 'ProfessionController@destroy')
     ->name('professions.destroy');
 
+Route::get('profesiones/{id}/restaurar', 'ProfessionController@restore')
+    ->name('professions.restore');
+
 // Skills
 Route::get('/habilidades/', 'SkillController@index')
     ->name('skills.index');
@@ -86,5 +90,8 @@ Route::get('/habilidades/papelera', 'SkillController@trashed')
 Route::patch('/habilidades/{skill}/papelera', 'SkillController@trash')
     ->name('skills.trash');
 
-Route::delete('/habilidades/{skill}', 'SkillController@destroy')
+Route::delete('/habilidades/{id}', 'SkillController@destroy')
     ->name('skills.destroy');
+
+Route::get('habilidades/{id}/restaurar', 'SkillController@restore')
+    ->name('skills.restore');
